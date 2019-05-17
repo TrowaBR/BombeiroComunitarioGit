@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <style>
+        div.a {
+            text-align: center;
+        }
+        div.b {
+            text-align: left;
+        }
+    </style>
+
+    <style type="text/css">
+        .ui-datalist .ui-datalist-content {
+            border:0 none
+        }
+
+        .ui-datalist ul {
+            padding:0px 10px 0 20px;
+            margin: 5px 0;
+        }
+
+        .label, .value {
+            vertical-align: top
+        }
+
+        .output {
+            font-weight: bold
+        }
+
+        .ui-selectmanymenu {
+            width: 175px;
+        }
+        table#1 {
+            text-align:center;
+        }
+
+        #btn1 {
+            margin-top:50%;
+            margin-bottom:50%;
+        }
+        
+        #btn2 {
+            margin-left:50%;
+            margin-right:50%;
+        }
+    </style>
+
+    <h:head>
+        <title>Cadastro de Eventos</title>
+        <h:outputStylesheet library="css" name="tema.css" />
+    </h:head>
+    <h:body>
+        <h:outputText
+            value="" />
+        <br />
+
+        <h:form>
+            <table id="1">
+                <div class="a">
+                    <h3>Cadastro de Eventos</h3>
+                    <div class="b">
+                        <h4>Descrição do evento</h4>
+                        <p:inputTextarea rows="1" cols="100" />
+                        <h4>Informe a data e horario do Evento</h4>
+                        <p:calendar id="datetime" value="#{calendarView.date10}" pattern="MM/dd/yyyy HH:mm" />
+                        <h4>Selecione os Bombeiros que irão participar do evento</h4>
+
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+                            <p:selectManyMenu id="basic" value="#{selectManyView.selectedOptions}">
+                                <f:selectItem itemLabel="Bombeiro 1" itemValue="1" />
+                                <f:selectItem itemLabel="Bombeiro 2" itemValue="2" />
+                                <f:selectItem itemLabel="Bombeiro 3" itemValue="3" />
+                                <f:selectItem itemLabel="Bombeiro 4" itemValue="3" />
+                                <f:selectItem itemLabel="Bombeiro 5" itemValue="3" />
+                                <f:selectItem itemLabel="Bombeiro 6" itemValue="3" />
+                                <f:selectItem itemLabel="Bombeiro 7" itemValue="3" />
+                                <f:selectItem itemLabel="Bombeiro 8" itemValue="3" />
+                            </p:selectManyMenu>
+                        </h:panelGrid>
+                        <p:commandButton value="ASSOCIAR" id="btn1" action="#{defaultCommandView.btn1Submit}" ajax="false"/>
+                        <p:commandButton value="DESASSOCIAR" id="btn2" action="#{defaultCommandView.btn2Submit}" />
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+                            <p:selectManyMenu id="basic2" value="#{selectManyView.selectedOptions}">
+                                <f:selectItem itemLabel="Bombeiro 1" itemValue="1" />
+                                <f:selectItem itemLabel="Bombeiro 2" itemValue="2" />
+                                <f:selectItem itemLabel="Bombeiro 3" itemValue="3" />
+
+                            </p:selectManyMenu>
+                        </h:panelGrid>
+                    </div>
+
+                    <h:button> Pesquisar </h:button>
+                    <h:button> Editar </h:button>
+                    <h:button> Excluir </h:button>
+                    <h:button> Salvar </h:button>
+                </div>
+            </table>
+
+
+
+
+
+        </h:form>
+
+    </h:body>
+
+</html>
+

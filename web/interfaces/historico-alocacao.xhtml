@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view>    
+        <h:head>
+            <style type="text/css">
+                .box,
+                .sample-layout > div {
+                    background-color: #cce4f7;
+                    text-align: center;
+                    padding-top: 1em;
+                    padding-bottom: 1em;
+                    border-radius: 4px;
+                }
+
+                .box-stretched {
+                    height: 100%;
+                }
+
+                .sample-layout {
+                    margin: 0;
+                }
+
+                .sample-layout > div {
+                    border: 1px solid #ffffff;
+                }
+
+                .vertical-container {
+                    margin: 0;
+                    height: 200px;
+                    background: #efefef;
+                    border-radius: 4px;
+                }
+
+                .nested-grid .p-col-4 {
+                    padding-bottom: 1em;
+                }
+                .table{
+                    padding-left: 10%;
+                    padding-right: 10%;
+                }
+            </style>
+            <title>Histórico de alocação</title>
+            <h:outputStylesheet library="css" name="tema.css" />
+        </h:head>
+        <h:body>
+            <h:form>
+                <p:dataTable class="table" var="user" value="#{histAlocacaoMB.agendamentoLista}" sortMode="multiple">
+                    <f:facet name="header">
+                        Histórico de Alocação
+                    </f:facet>
+                    <p:column headerText="Pelotão" sortBy="#{user.pelotao}">
+                        <h:outputText value="#{user.pelotao}" />
+                    </p:column>
+
+                    <p:column headerText="Usuário" sortBy="#{user.usuario}">
+                        <h:outputText value="#{user.usuario}" />
+                    </p:column>
+
+                    <p:column headerText="Entrada" sortBy="#{user.dt_entrada}">
+                        <h:outputText value="#{user.dt_entrada}" />
+                    </p:column>
+
+                    <p:column headerText="Saída" sortBy="#{user.dt_saida}">
+                        <h:outputText value="#{user.dt_saida}" />
+                    </p:column>
+                    <p:column headerText="Horas" sortBy="#{user.tot_horas}">
+                        <h:outputText value="#{user.tot_horas}" />
+                    </p:column>
+                </p:dataTable>
+                <h:panelGrid columns="3" ></h:panelGrid>
+            </h:form>
+        </h:body>
+    </f:view>
+</html>

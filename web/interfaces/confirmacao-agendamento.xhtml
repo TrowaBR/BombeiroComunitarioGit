@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:form>
+            <h:head>
+                <title>Bombeiro Comunitário</title>
+                <h:outputStylesheet library="css" name="tema.css" />
+                <!--<ui:include src="menuInicial.xhtml" />       Chama o menu inicial-->
+            </h:head>
+            <h:body>
+                <h:panelGroup id="box">
+                    <p:panel header="Confirmação de agendamento">
+                        <p:dataTable var=" " value=" ">
+                            <p:column headerText="Nome">
+                                <h:outputText value="Nome de teste" /><br />
+                            </p:column>
+
+                            <p:column headerText="Data">
+                                <h:outputText value="aa/aa/aaaa" />
+                            </p:column>
+
+                            <p:column headerText="Aprovação">
+                                <p:selectOneRadio id="compareceu" value="">
+                                    <f:selectItem itemLabel="Presença" itemValue="Presença" />
+                                    <f:selectItem itemLabel="Ausência" itemValue="Ausência" />
+                                </p:selectOneRadio>    
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGroup>    
+
+                <h:panelGroup id="box1" style="padding: 500%"> <!--padding pra fazer a separação dos dois PanelGroup << ESSA É A MINHA TELA, DE CIMA É DO JEDIELSON MAS CRIEI TAMBÉM PRA DEIXAR O XHTML COMPLETO-->
+                    <p:panel header="Solicitação de agendamento">
+                        <p:dataTable var=" " value=" ">
+                            <p:column headerText="Nome">
+                                <h:outputText value="Nome de teste" /><br />
+                            </p:column>
+
+                            <p:column headerText="Data">
+                                <h:outputText value="aa/aa/aaaa" />
+                            </p:column>
+
+                            <p:column headerText="Aprovação">
+                                <p:button value="Aprovar"> </p:button> 
+                                <p:commandButton value="Recusar" type="button" onclick="PF('dlg1').show();" /> 
+                            </p:column>
+                        </p:dataTable>
+                        <p:dialog header="Informe o motivo para recusar" widgetVar="dlg1" minHeight="40">
+                            <p:inputText />
+                            <p:button style="left: 10px" value="OK"> </p:button> 
+                            <p:button style="left: 10px" value="Cancelar"> </p:button> 
+                        </p:dialog>
+                    </p:panel>
+                </h:panelGroup>
+            </h:body>
+        </h:form>
+    </f:view>
+</html>

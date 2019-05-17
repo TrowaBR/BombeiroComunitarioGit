@@ -1,4 +1,4 @@
-package br.edu.unisociesc.model;
+package br.edu.unisociesc.bombeiro.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
