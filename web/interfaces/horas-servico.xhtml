@@ -8,10 +8,10 @@
         <h:outputStylesheet library="css" name="tema.css"/>
     </h:head>
     <h:body>
-
-        <ui:include src="menuInicial.xhtml"/>
-        <br/>
         <h:form styleClass="formTabela">
+            <p:menubar model="#{menuView.model}" />
+            <br />
+            <p:growl id="messages" showDetail="true" />
             <p:dataTable var="relatorio" value="#{usuarioBean.relatorioHoras}" rows="20" paginator="true" paginatorTemplate="{CurrentPageReport}
                          {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                 <p:column headerText="Usuário" sortBy="#{relatorio.nome}">

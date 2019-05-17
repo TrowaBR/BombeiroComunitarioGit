@@ -7,39 +7,15 @@
     <h:head>
         <f:facet name="first">
             <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-            <title>Bombeiro Comunitário</title>
+            <title>Bem vindo!</title>
             <h:outputStylesheet library="css" name="tema.css" />
         </f:facet>
     </h:head>
     <h:body>
-        <p:panel header="Bem vindo ao cusro de TSI"></p:panel>
         <h:form>  
-            <p:growl id="messages"/>
-
-            <p:menubar>
-                <p:submenu label="Cadastros" icon="pi pi-pencil">
-                    <p:menuitem value="Meu Cadastro" url="histAlocacao.xhtml"/>
-                    <p:menuitem value="testestesteste" url="meuUsuario.xhtml"/>  
-                    <p:menuitem value="Usuários" url="#"/>
-                    <p:menuitem value="Unidades" url="#"/>
-                    <p:menuitem value="Parâmetros" url="#"/>
-                </p:submenu>
-
-                <p:submenu label="Processos" icon="pi pi-pencil">
-                    <p:menuitem value="Calendário" url="#"/>
-                    <p:submenu label="Agendamentos" icon="pi pi-pencil">
-                        <p:menuitem value="Histórico" url="#"/>  
-                        <p:menuitem value="Solicitações" url="#"/>  
-                    </p:submenu>
-                </p:submenu>
-
-                <p:submenu label="Relatórios" icon="pi pi-pencil">
-                    <p:menuitem value="Agendamentos" url="#"/>
-                    <p:menuitem value="Horas de Serviço" url="#"/>  
-                </p:submenu>
-
-                <p:menuitem value="Sair" url="#"/>  
-            </p:menubar>
+            <p:menubar model="#{menuView.model}" />
+            <br />
+            <p:growl id="messages" showDetail="true" />
         </h:form>
     </h:body>
 </html>

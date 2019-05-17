@@ -7,11 +7,14 @@
 
     <f:view contentType="text/html">
         <h:head>
-            <title>Bombeiro Comunitário</title>
+            <title>Cadastro de perfil</title>
             <h:outputStylesheet library="css" name="tema.css" />
         </h:head>
         <h:body>
             <h:form>  
+                <p:menubar model="#{menuView.model}" />
+                <br />
+                <p:growl id="messages" showDetail="true" />
                 <h:panelGrid columns="3">
                     <h:outputLabel value="Nome" />
                     <h:inputText id="nome" size="50"/>
@@ -23,7 +26,6 @@
 
                     <h:commandButton id="btnEnviar" value="Enviar" type="submit"/>
                     <h:commandButton id="btnLimpar" value="Limpar" type="reset"/>
-
                 </h:panelGrid>
             </h:form>
         </h:body>

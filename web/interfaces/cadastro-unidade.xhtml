@@ -11,99 +11,74 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Bombeiro Comunitário</title>
+        <title>Cadastro de unidade</title>
         <h:outputStylesheet library="css" name="tema.css" />
     </h:head>
     <h:body>
-        <p:panel header="Bem vindo ao Sistema de Agendamento do Bombeiro Comunitário">
-        </p:panel> 
+        <h:form>
+            <p:menubar model="#{menuView.model}" />
+            <br />
+            <p:growl id="messages" showDetail="true" />
+            <p:dataTable var="car" value="#">
+                <p:column headerText="Descrição da Unidade">
+                    <h:outputText value="Garcia" />
+                </p:column>
+                <p:column headerText="Leitos masculinos">
+                    <h:outputText value="8" />
+                </p:column>
+                <p:column headerText="Leitos femininos">
+                    <h:outputText value="6" />
+                </p:column>                
+
+            </p:dataTable>
+            <p:commandButton value="Novo" type="button" onclick="PF('dlg2').show()();" />
+            <p:dialog header="Dados Cadastrais" widgetVar="dlg2" modal="false" height="500">
+                <h:outputText value="#" />
+                <h:outputLabel for="name" value="Descrição" />
+                <p:inputText id="name" required="true" /> <br/><br/>
+
+                <h:outputLabel for="name" value="Escala mínima(horas)" />
+                <p:inputText id="name" required="true" />
+
+                <p:outputLabel for="@next" value="Escala máxima(horas)" />
+                <p:inputText id="extended" required="true" /> <br/>
+
+                <p:outputLabel for="@next" value="Leitos masculinos" />
+                <p:inputText id="extended" required="true" />
+
+                <p:outputLabel for="@next" value="Leitos femininos" />
+                <p:inputText id="extended" required="true" /> <br/>
+
+                <h:outputLabel for="name" value="Horas início masculino" />
+                <p:inputText id="name" required="true" />
+
+                <p:outputLabel for="@next" value="Hora término masculino" />
+                <p:inputText id="extended" required="true" /> <br/>
+
+                <p:outputLabel for="@next" value="Hora início feminino" />
+                <p:inputText id="extended" required="true" />
+
+                <p:outputLabel for="@next" value="Hora término feminino" />
+                <p:inputText id="extended" required="true" /> <br/>
+
+                <p:selectBooleanCheckbox value="#" itemLabel="Inativo"/> <br/> <br/>
+
+                <h:outputLabel for="name" value="Endereço" />
+                <p:inputText id="name" required="true" />
+
+                <p:outputLabel for="@next" value="Ponto de referência" />
+                <p:inputText id="extended" required="true" /> <br/>
+
+                <p:outputLabel for="@next" value="Cep" />
+                <p:inputText id="extended" required="true" />
+
+                <p:outputLabel for="@next" value="Cidade" />
+                <p:inputText id="extended" required="true" /> <br/><br/><br/><br/> 
+
+                <p:commandButton value="Salvar" type="button" onclick="submit" />
+            </p:dialog>        
+            <p:commandButton value="Editar" type="button" onclick="submit" />
+            <p:commandButton value="Remover" type="button" onclick="submit" />
+        </h:form>      
     </h:body>    
-    <h:form>                  
-        <p:menubar>
-            <p:submenu label="Cadastros" icon="pi pi-pencil">
-                <p:menuitem value="Meu Cadastro" url="interfaces/meuUsuario.xhtml"/>
-                <p:menuitem value="Perfis" url=""/>  
-                <p:menuitem value="Usuários" url="#"/>
-                <p:menuitem value="Unidades" url="#"/>
-                <p:menuitem value="Parâmetros" url="#"/>
-            </p:submenu>
-
-            <p:submenu label="Processos" icon="pi pi-pencil">
-                <p:menuitem value="Calendário" url="#"/>
-                <p:submenu label="Agendamentos" icon="pi pi-pencil">
-                    <p:menuitem value="Histórico" url="#"/>  
-                    <p:menuitem value="Solicitações" url="#"/>  
-                </p:submenu>
-            </p:submenu>
-
-            <p:submenu label="Relatórios" icon="pi pi-pencil">
-                <p:menuitem value="Agendamentos" url="#"/>
-                <p:menuitem value="Horas de Serviço" url="#"/>  
-            </p:submenu>
-
-            <p:menuitem value="Sair" url="#"/>               
-        </p:menubar>
-
-        <p:dataTable var="car" value="#">
-            <p:column headerText="Descrição da Unidade">
-                <h:outputText value="Garcia" />
-            </p:column>
-            <p:column headerText="Leitos masculinos">
-                <h:outputText value="8" />
-            </p:column>
-            <p:column headerText="Leitos femininos">
-                <h:outputText value="6" />
-            </p:column>                
-
-        </p:dataTable>
-        <p:commandButton value="Novo" type="button" onclick="PF('dlg2').show()();" />
-        <p:dialog header="Dados Cadastrais" widgetVar="dlg2" modal="false" height="500">
-            <h:outputText value="#" />
-            <h:outputLabel for="name" value="Descrição" />
-            <p:inputText id="name" required="true" /> <br/><br/>
-
-            <h:outputLabel for="name" value="Escala mínima(horas)" />
-            <p:inputText id="name" required="true" />
-
-            <p:outputLabel for="@next" value="Escala máxima(horas)" />
-            <p:inputText id="extended" required="true" /> <br/>
-
-            <p:outputLabel for="@next" value="Leitos masculinos" />
-            <p:inputText id="extended" required="true" />
-
-            <p:outputLabel for="@next" value="Leitos femininos" />
-            <p:inputText id="extended" required="true" /> <br/>
-
-            <h:outputLabel for="name" value="Horas início masculino" />
-            <p:inputText id="name" required="true" />
-
-            <p:outputLabel for="@next" value="Hora término masculino" />
-            <p:inputText id="extended" required="true" /> <br/>
-
-            <p:outputLabel for="@next" value="Hora início feminino" />
-            <p:inputText id="extended" required="true" />
-
-            <p:outputLabel for="@next" value="Hora término feminino" />
-            <p:inputText id="extended" required="true" /> <br/>
-
-            <p:selectBooleanCheckbox value="#" itemLabel="Inativo"/> <br/> <br/>
-
-            <h:outputLabel for="name" value="Endereço" />
-            <p:inputText id="name" required="true" />
-
-            <p:outputLabel for="@next" value="Ponto de referência" />
-            <p:inputText id="extended" required="true" /> <br/>
-
-            <p:outputLabel for="@next" value="Cep" />
-            <p:inputText id="extended" required="true" />
-
-            <p:outputLabel for="@next" value="Cidade" />
-            <p:inputText id="extended" required="true" /> <br/><br/><br/><br/> 
-
-            <p:commandButton value="Salvar" type="button" onclick="submit" />
-        </p:dialog>        
-        <p:commandButton value="Editar" type="button" onclick="submit" />
-        <p:commandButton value="Remover" type="button" onclick="submit" />
-    </h:form>      
 </html>
-

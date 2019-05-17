@@ -20,19 +20,23 @@ public class MenuView {
         DefaultMenuItem item;
 
         item = new DefaultMenuItem("Meu Cadastro");
-        item.setOutcome("/interfaces/meuUsuario");
+        item.setOutcome("/interfaces/meu-cadastro");
         cadastros.addElement(item);
 
         item = new DefaultMenuItem("Perfis");
-        item.setDisabled(true);
+        item.setOutcome("/interfaces/cadastro-perfil");
         cadastros.addElement(item);
 
         item = new DefaultMenuItem("Usuários");
-        item.setDisabled(true);
+        item.setOutcome("/interfaces/cadastro-usuario");
         cadastros.addElement(item);
 
         item = new DefaultMenuItem("Unidades");
-        item.setDisabled(true);
+        item.setOutcome("/interfaces/cadastro-unidade");
+        cadastros.addElement(item);
+
+        item = new DefaultMenuItem("Eventos");
+        item.setOutcome("/interfaces/cadastro-evento");
         cadastros.addElement(item);
 
         item = new DefaultMenuItem("Parâmetros");
@@ -50,14 +54,14 @@ public class MenuView {
         item.setOutcome("/interfaces/calendario");
         processos.addElement(item);
 
-        DefaultSubMenu agendamentos = new DefaultSubMenu("Agendamentos");
+        DefaultSubMenu agendamentos = new DefaultSubMenu("Agendamentos >");
 
         item = new DefaultMenuItem("Histórico");
-        item.setDisabled(true);
+        item.setOutcome("/interfaces/historico-alocacao");
         agendamentos.addElement(item);
 
         item = new DefaultMenuItem("Solicitações");
-        item.setDisabled(true);
+        item.setOutcome("/interfaces/confirmacao-agendamento");
         agendamentos.addElement(item);
 
         processos.addElement(agendamentos);
@@ -74,7 +78,7 @@ public class MenuView {
         relatorios.addElement(item);
 
         item = new DefaultMenuItem("Horas de serviço");
-        item.setDisabled(true);
+        item.setOutcome("/interfaces/horas-servico");
         relatorios.addElement(item);
 
         model.addElement(relatorios);

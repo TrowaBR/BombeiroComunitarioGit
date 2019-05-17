@@ -49,6 +49,9 @@
         </h:head>
         <h:body>
             <h:form>
+                <p:menubar model="#{menuView.model}" />
+                <br />
+                <p:growl id="messages" showDetail="true" />
                 <p:dataTable class="table" var="user" value="#{histAlocacaoMB.agendamentoLista}" sortMode="multiple">
                     <f:facet name="header">
                         Histórico de Alocação

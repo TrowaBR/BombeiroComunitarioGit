@@ -8,11 +8,14 @@
     <f:view contentType="text/html">
         <h:form>
             <h:head>
-                <title>Bombeiro Comunitário</title>
+                <title>Solicitações agendadas</title>
                 <h:outputStylesheet library="css" name="tema.css" />
                 <!--<ui:include src="menuInicial.xhtml" />       Chama o menu inicial-->
             </h:head>
             <h:body>
+                <p:menubar model="#{menuView.model}" />
+                <br />
+                <p:growl id="messages" showDetail="true" />
                 <h:panelGroup id="box">
                     <p:panel header="Confirmação de agendamento">
                         <p:dataTable var=" " value=" ">

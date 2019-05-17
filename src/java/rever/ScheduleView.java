@@ -1,5 +1,6 @@
-package br.edu.unisociesc.bombeiro.controller;
+package rever;
 
+import rever.AgendamentoEvent;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
