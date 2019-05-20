@@ -2,6 +2,12 @@
 
 ### Passo a passo no NetBeans:
 
+1. Crie um novo projeto com o nome **BombeiroComunitarioGit**
+
+   * Projeto: `Aplicação Web`
+
+   * Frameworks: `Java Server Faces` com `Primefaces` e `Hibernate`
+
 1. Clique-direito no projeto > Controle de Versão > Inicializar Repositório Git
 
 1. Clique-direito no projeto > Git > Remoto > Puxar
@@ -22,7 +28,9 @@
 
    * Pressionar **Finalizar**
 
-Repita o passo 2 em diante para atualizar os fontes.
+Repita o passo 3 em diante para atualizar os fontes.
+
+Será necessário existir uma conexão Postgre local comum banco `bombeiro` conforme configurado em sala.
 
 ### Para enviar suas alterações:
 
