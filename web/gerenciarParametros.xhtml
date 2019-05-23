@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="layout.xhtml">
+        <ui:define name="content">
+            <p:panel>
+                <b><p:outputLabel value="PARÂMETROS DISPONÍVEIS" /></b>
+                <br></br>
+                <br></br>
+                <h:form id="formCadastroParametros">
+                    <h:panelGrid columns="1">
+                        <p:inputText placeholder="Tempo de cancelamento" style="width: 200%"/>
+                        <p:inputText placeholder="Tempo de reagendamento" style="width: 200%"/>
+                        <p:inputText placeholder="Período de meses" style="width: 200%"/>
+                        <p:inputText placeholder="Mínimo de horas no período" style="width: 200%"/>
+                        <p:inputText placeholder="Máximo de horas semanais" style="width: 200%"/>
+                         <p:commandButton id="btnEnviar" value="Salvar" type="submit"/>
+                    </h:panelGrid>
+                    <p:outputLabel>Temos que ajustar essa interface, tá faltando o último campo</p:outputLabel>
+                </h:form>
+                <br></br>
+            </p:panel>
+            <br></br>
+        </ui:define>
+    </ui:composition>
+
+
+</html>

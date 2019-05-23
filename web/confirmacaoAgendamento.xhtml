@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="layout.xhtml">
+        <ui:define name="content">
+            <p:panel>
+                <b><p:outputLabel value="AGENDAMENTOS" /></b>
+                <br></br>
+                <br></br>
+                <h:form id="formConfirmacaoAgendamento">
+                    <h:panelGroup id="box">
+                        <p:panel header="Confirmação de agendamento">
+                            <p:dataTable var=" " value=" ">
+                                <p:column headerText="Nome">
+                                    <h:outputText value="Nome de teste" /><br />
+                                </p:column>
+
+                                <p:column headerText="Data">
+                                    <h:outputText value="aa/aa/aaaa" />
+                                </p:column>
+
+                                <p:column headerText="Aprovação">
+                                    <p:selectOneRadio id="compareceu" value="">
+                                        <f:selectItem itemLabel="Presença" itemValue="Presença" />
+                                        <f:selectItem itemLabel="Ausência" itemValue="Ausência" />
+                                    </p:selectOneRadio>    
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </h:panelGroup>    
+
+
+
+                    <h:panelGroup id="box1" style="padding: 500%"> <!--padding pra fazer a separação dos dois PanelGroup << ESSA É A MINHA TELA, DE CIMA É DO JEDIELSON MAS CRIEI TAMBÉM PRA DEIXAR O XHTML COMPLETO-->
+                        <p:panel header="Solicitação de agendamento">
+                            <p:dataTable var=" " value=" ">
+                                <p:column headerText="Nome">
+                                    <h:outputText value="Nome de teste" /><br />
+                                </p:column>
+
+                                <p:column headerText="Data">
+                                    <h:outputText value="aa/aa/aaaa" />
+                                </p:column>
+
+                                <p:column headerText="Aprovação">
+                                    <p:button value="Aprovar"> </p:button> 
+                                    <p:commandButton value="Recusar" type="button" onclick="PF('dlg1').show();" /> 
+                                </p:column>
+                            </p:dataTable>
+                            <p:dialog header="Informe o motivo para recusar" widgetVar="dlg1" minHeight="40">
+                                <p:inputText />
+                                <p:button style="left: 10px" value="OK"> </p:button> 
+                                <p:button style="left: 10px" value="Cancelar"> </p:button> 
+                            </p:dialog>
+                        </p:panel>
+                    </h:panelGroup>
+                </h:form>
+                <br></br>
+            </p:panel>
+            <br></br>
+        </ui:define>
+    </ui:composition>
+
+
+</html>

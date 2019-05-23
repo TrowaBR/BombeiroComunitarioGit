@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="layout.xhtml">
+        <ui:define name="content">
+            <p:panel>
+                <b><p:outputLabel value="PERFIS DISPONÍVEIS" /></b>
+                <br></br>
+                <br></br>
+                <h:form id="formCadastroPerfil">
+                    <h:panelGrid columns="3">
+
+                        <p:outputLabel value="Nome" />
+                        <p:inputText id="nome" size="50"/>
+                        <h:message for="nome" />
+
+                        <p:outputLabel value="Status"/>
+                        <p:selectOneMenu id="status">
+                            <f:selectItem itemLabel="Ativo" itemValue="A" />
+                            <f:selectItem itemLabel="Inativo" itemValue="I" />
+                            <h:message for="status" />
+                        </p:selectOneMenu>
+
+                        
+                        <p:commandButton id="btnEnviar" value="Enviar" type="submit"/>
+                        <p:commandButton id="btnLimpar" value="Limpar" type="reset"/>
+
+                    </h:panelGrid>
+                    <p:outputLabel>Temos que ajustar essa interface, botões não alinhados</p:outputLabel>
+                </h:form>
+                <br></br>
+            </p:panel>
+            <br></br>
+        </ui:define>
+    </ui:composition>
+
+
+</html>

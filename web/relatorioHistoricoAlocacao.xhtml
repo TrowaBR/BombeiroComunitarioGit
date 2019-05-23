@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="layout.xhtml">
+        <ui:define name="content">
+            <p:panel>
+                <b><p:outputLabel value="HISTÓRICO DE ALOCAÇÃO" /></b>
+                <br></br>
+                <br></br>
+                <h:form id="formrelHorasAlocacaoo">
+
+                    <p:dataTable class="table" var="user" value="#{relatorioHistoricoAlocacao.agendamentoLista}" sortMode="multiple">
+
+                        <f:facet name="header">
+                            Histórico de Alocação
+                        </f:facet>
+                        <p:column headerText="Pelotão" sortBy="#{user.pelotao}">
+                            <h:outputText value="#{user.pelotao}" />
+                        </p:column>
+
+                        <p:column headerText="Usuário" sortBy="#{user.usuario}">
+                            <h:outputText value="#{user.usuario}" />
+                        </p:column>
+
+                        <p:column headerText="Entrada" sortBy="#{user.dt_entrada}">
+                            <h:outputText value="#{user.dt_entrada}" />
+                        </p:column>
+
+                        <p:column headerText="Saída" sortBy="#{user.dt_saida}">
+                            <h:outputText value="#{user.dt_saida}" />
+                        </p:column>
+                        <p:column headerText="Horas" sortBy="#{user.tot_horas}">
+                            <h:outputText value="#{user.tot_horas}" />
+                        </p:column>
+
+
+                    </p:dataTable>
+                    <h:panelGrid columns="3" ></h:panelGrid>
+
+
+                </h:form>
+
+                <br></br>
+            </p:panel>
+            <br></br>
+        </ui:define>
+    </ui:composition>
+
+
+</html>

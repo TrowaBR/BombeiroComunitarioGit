@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="layout.xhtml">
+        <ui:define name="content">
+            <p:panel>
+                <b><p:outputLabel value="USUÁRIOS DISPONÍVEIS" /></b>
+                <br></br>
+                <br></br>
+                <h:form id="formCadastro">
+                    <p:dataTable value="#{usuarioController.listarUsuarios}" var="usuario" paginator="true" rows="10" emptyMessage="Não há usuários cadastrados">
+                        <p:column headerText="Nome Completo">
+                            <f:facet name="header">
+                                <h:outputText value="Nome Completo"/>
+                            </f:facet>
+                            <h:outputText value="#{usuario.nomeCompleto}"/>
+                        </p:column>
+
+                        <p:column headerText="Nome de Guerra">
+                            <f:facet name="header">
+                                <h:outputText value="Nome de Guerra"/>
+                            </f:facet>
+                            <h:outputText value="#{usuario.nomeGuerra}"/>
+                        </p:column>
+                        <p:column headerText="Telefone">
+                            <f:facet name="header">
+                                <h:outputText value="Telefone"/>
+                            </f:facet>
+                            <h:outputText value="#{usuario.telefone}"/>
+                        </p:column>
+                        <p:column headerText="E-mail">
+                            <f:facet name="header">
+                                <h:outputText value="E-mail"/>
+                            </f:facet>
+                            <h:outputText value="#{usuario.email}"/>
+                        </p:column>
+                        <p:column headerText="Alterar" style="width: 8%;">
+                            <p:commandButton update=":formAlterar"
+                                             onclick="PF('altera').show()"
+                                             value="Alterar">
+                                <f:setPropertyActionListener value="#{usuario}" 
+                                                             target="#{usuarioController.usuario}"></f:setPropertyActionListener>				
+                            </p:commandButton>
+
+                        </p:column>
+                        <p:column headerText="Excluir" style="width: 8%;">
+                            <p:commandButton action="#{usuarioController.excluirUsuario()}"
+                                             update=":formCadastro"
+                                             value="Excluir">
+                                <f:setPropertyActionListener value="#{usuario}"
+                                                             target="#{usuarioController.usuario}"></f:setPropertyActionListener>
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>	
+                </h:form>
+
+                <p:dialog header="Alterar Usuário" widgetVar="altera" modal="true" showEffect="fade" hideEffect="fade" resizable="false" style="text-align: left;">
+                    <h:form id="formAlterar">
+                        <h:inputHidden value="#{usuarioController.usuario.id}"/>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Nome Completo: "/>
+                            <p:inputText value="#{usuarioController.usuario.nomeCompleto}" maxlength="100" size="100"/>
+                            <h:outputText value="Nome de Guerra: "/>
+                            <p:inputText value="#{usuarioController.usuario.nomeGuerra}" maxlength="100" size="50"/>
+                            <h:outputText value="Telefone: "/>
+                            <p:inputText value="#{usuarioController.usuario.telefone}" maxlength="100" size="20" />
+                            <h:outputText value="E-mail: "/>
+                            <p:inputText value="#{usuarioController.usuario.email}" maxlength="100" size="80"  />
+                            <p:commandButton value="Salvar"
+                                             update=":ac2:formCadastro"
+                                             ajax="false"
+                                             action="#{usuarioController.alterarUsuario()}"
+                                             onclick="PF('altera').hide()"></p:commandButton>
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog header="Cadastrar Novo Usuário" widgetVar="cadastra" modal="true" showEffect="fade" hideEffect="fade" resizable="false" style="text-align: left;">
+                    <h:form id="formCadastrar">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Nome Completo: "/>
+                            <p:inputText maxlength="100" size="100" value="#{usuarioController.usuario.nomeCompleto}" />
+                            <h:outputLabel value="Nome de Guerra: "/>
+                            <p:inputText maxlength="100" size="50" value="#{usuarioController.usuario.nomeGuerra}" />
+                            <h:outputLabel value="Telefone: "/>
+                            <p:inputText maxlength="100" size="20" value="#{usuarioController.usuario.telefone}" />
+                            <h:outputLabel value="E-mail: "/>
+                            <p:inputText maxlength="100" size="80" value="#{usuarioController.usuario.email}" />
+                            <p:commandButton value="Salvar"
+                                             update=":formCadastro"
+                                             ajax="false"
+                                             action="#{usuarioController.adicionarUsuario()}"
+                                             onclick="PF('cadastra').hide()"></p:commandButton>
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+                <br></br>
+                <h:form>
+                    <p:commandButton value="Novo Usuário" action="#{usuarioController.prepararAdicionarUsuario()}"
+                                     update=":formCadastrar"
+                                     onclick="PF('cadastra').show()"/>
+
+
+                </h:form>
+
+
+
+            </p:panel>
+            <br></br>
+
+        </ui:define>
+    </ui:composition>
+
+
+</html>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="layout.xhtml">
+        <ui:define name="content">
+            <p:panel>
+                <b><p:outputLabel value="PERMISSÕES DISPONÍVEIS" /></b>
+                <br></br>
+                <br></br>
+                <h:form id="formCadastroPermissoes">
+
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+                        <p:outputLabel for="console" value="Selecionar Perfil:" />
+                        <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
+                            <f:selectItem itemLabel="Nenhum" itemValue="" />
+                            <f:selectItem itemLabel="Bombeiro" itemValue="bombeiro" />
+                            <f:selectItem itemLabel="Sargento" itemValue="sargento" />
+                            <f:selectItem itemLabel="Administração" itemValue="administracao" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                </h:form>
+                <h:form>
+
+                    <p:growl id="msg" />
+
+                    <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value1}" itemLabel="Cadastros - Consultar Meu Cadastro"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value2}" itemLabel="Perfis - Consultar"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value3}" itemLabel="Perfis - Editar"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value4}" itemLabel="Usuários - Definir Permissões"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value5}" itemLabel="Usuários - Inativar Usuários"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value6}" itemLabel="Usuários - Consultar Usuários"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value7}" itemLabel="Usuários - Editar Usuários"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value8}" itemLabel="Usuários - Cadastrar Usuários"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value9}" itemLabel="Unidades - Consultar Unidade"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value10}" itemLabel="Unidades - Editar Unidade"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value11}" itemLabel="Unidades - Cadastrar Unidade"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value12}" itemLabel="Parâmetros - Consultar Parâmetros"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value13}" itemLabel="Parâmetros - Editar Parâmetros"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value14}" itemLabel="Parâmetros - Cadastrar Parâmetros"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value15}" itemLabel="Eventos - Consultar Eventos"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value16}" itemLabel="Eventos - Editar Eventos"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value17}" itemLabel="Eventos - Cadastrar Eventos"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value18}" itemLabel="Repositório - Excluir Documento"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value19}" itemLabel="Repositório - Editar Documento"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value20}" itemLabel="Repositório - Consultar Documento"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value21}" itemLabel="Repositório - Incluir Documento"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value22}" itemLabel="Calendário de Agendamentos - Consultar Agendamentos"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value23}" itemLabel="Calendário de Agendamentos - Solicitar Agendamentos"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value24}" itemLabel="Histórico de Agendamentos - Consultar"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value25}" itemLabel="Confirmação de Agendamentos - Registrar Ausência"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value26}" itemLabel="Confirmação de Agendamentos - Registrar Presença"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value27}" itemLabel="Confirmação de Agendamentos - Listar Agendamentos para Confirmação"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value28}" itemLabel="Autorização de Agendamentos - Aprovar Solicitação"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value29}" itemLabel="Autorização de Agendamentos - Recusar Solicitação"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value30}" itemLabel="Autorização de Agendamentos - Listar Solicitação"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value31}" itemLabel="Relatórios - Histórico de Alocação"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value32}" itemLabel="Relatórios - Horas de Serviço"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value33}" itemLabel="Agenda - Consultar Detalhes"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value34}" itemLabel="Agenda - Consultar Disponibilidade"/>
+
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value35}" itemLabel="Agenda - Consultar Agenda">
+                            <p:ajax update="msg" listener="#{selectBooleanView.addMessage}" />
+                        </p:selectBooleanCheckbox>
+                    </h:panelGrid>
+
+                    <p:commandButton value="Salvar" icon="pi pi-check" update="display" oncomplete="PF('dlg').show()" />
+
+                    <p:dialog header="Values" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
+                        <h:panelGrid columns="1" id="display">
+                            <h:outputText value="Value 1: #{selectBooleanView.value1}" />
+                            <h:outputText value="Value 2: #{selectBooleanView.value2}" />
+                            <h:outputText value="Value 3: #{selectBooleanView.value3}" />
+                            <h:outputText value="Value 4: #{selectBooleanView.value4}" />
+                            <h:outputText value="Value 5: #{selectBooleanView.value5}" />
+                            <h:outputText value="Value 6: #{selectBooleanView.value6}" />
+                            <h:outputText value="Value 7: #{selectBooleanView.value7}" />
+                            <h:outputText value="Value 8: #{selectBooleanView.value8}" />
+                            <h:outputText value="Value 9: #{selectBooleanView.value9}" />
+                            <h:outputText value="Value 10: #{selectBooleanView.value10}" />
+                            <h:outputText value="Value 11: #{selectBooleanView.value11}" />
+                            <h:outputText value="Value 12: #{selectBooleanView.value12}" />
+                            <h:outputText value="Value 13: #{selectBooleanView.value13}" />
+                            <h:outputText value="Value 14: #{selectBooleanView.value14}" />
+                            <h:outputText value="Value 15: #{selectBooleanView.value15}" />
+                            <h:outputText value="Value 16: #{selectBooleanView.value16}" />
+                            <h:outputText value="Value 17: #{selectBooleanView.value17}" />
+                            <h:outputText value="Value 18: #{selectBooleanView.value18}" />
+                            <h:outputText value="Value 19: #{selectBooleanView.value19}" />
+                            <h:outputText value="Value 20: #{selectBooleanView.value20}" />
+                            <h:outputText value="Value 21: #{selectBooleanView.value21}" />
+                            <h:outputText value="Value 22: #{selectBooleanView.value22}" />
+                            <h:outputText value="Value 23: #{selectBooleanView.value23}" />
+                            <h:outputText value="Value 24: #{selectBooleanView.value24}" />
+                            <h:outputText value="Value 25: #{selectBooleanView.value25}" />
+                            <h:outputText value="Value 26: #{selectBooleanView.value26}" />
+                            <h:outputText value="Value 27: #{selectBooleanView.value27}" />
+                            <h:outputText value="Value 28: #{selectBooleanView.value28}" />
+                            <h:outputText value="Value 29: #{selectBooleanView.value29}" />
+                            <h:outputText value="Value 30: #{selectBooleanView.value30}" />
+                            <h:outputText value="Value 31: #{selectBooleanView.value31}" />
+                            <h:outputText value="Value 32: #{selectBooleanView.value32}" />
+                            <h:outputText value="Value 33: #{selectBooleanView.value33}" />
+                            <h:outputText value="Value 34: #{selectBooleanView.value34}" />               
+                            <h:outputText value="Value 35: #{selectBooleanView.value35}" />
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
+                <br></br>
+            </p:panel>
+            <br></br>
+        </ui:define>
+    </ui:composition>
+
+
+</html>

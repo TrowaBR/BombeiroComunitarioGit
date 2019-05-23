@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="layout.xhtml">
+        <ui:define name="content">
+            <p:panel>
+                <b><p:outputLabel value="MEUS DADOS DE CADASTRO NO SISTEMA" /></b>
+                <br></br>
+                <br></br>
+                
+                <h:form id="formMeuCadastro">
+                    <h:panelGrid columns="3">
+
+                        <p:outputLabel value="E-mail"/>
+                        <p:inputText id="email" size="50" value="#{meuCadastroMB.usuario.email}"/>
+                        <h:message for="email" />
+
+                        <p:outputLabel value="Senha" />
+                        <p:password id="senha" size="30" value="#{meuCadastroMB.usuario.senha}" feedback="true" />
+                        <h:message for="senha" />
+
+                        <p:outputLabel value="Endereço"/>
+                        <p:inputText id="endereco"  size="50" value="#{meuCadastroMB.usuario.endereco}"/>
+                        <h:message for="endereco" />  
+
+                        <p:outputLabel value="Número"/>
+                        <p:inputText id="numero" size="10" value="#{meuCadastroMB.usuario.numero}"/>
+                        <h:message for="numero" />
+
+                        <p:outputLabel value="complemento"/>
+                        <p:inputText id="complemento" size="10" value="#{meuCadastroMB.usuario.complemento}"/>
+                        <h:message for="complemento" />
+
+                        <p:outputLabel value="Ponto de Referência"/>
+                        <p:inputText id="pontoreferencia" size="50" value="#{meuCadastroMB.usuario.pontoreferencia}"/>
+                        <h:message for="pontoreferencia" />
+
+                        <p:outputLabel value="CEP"/>
+                        <p:inputMask id="cep" size="10" value="#{meuCadastroMB.usuario.cep}" mask="99.999-999"/>
+                        <h:message for="cep" />
+
+                        <p:outputLabel value="Cidade"/>
+                        <p:inputText id="cidade" size="30" value="#{meuCadastroMB.usuario.cidade}"/>
+                        <h:message for="cidade" />
+
+                        <p:outputLabel value="UF"/>
+                        <p:inputText id="uf" size="10" value="#{meuCadastroMB.usuario.uf}"/>
+                        <h:message for="uf" />
+
+                        <p:outputLabel value="Telefone"/>
+                        <p:inputMask id="telefone" size="20" value="#{meuCadastroMB.usuario.telefone}" mask="(99)99999-9999"/>
+                        <h:message for="telefone" />
+
+                        <p:outputLabel value="CNS"/>
+                        <p:inputText id="cns" size="20" value="#{meuCadastroMB.usuario.cns}"/>
+                        <h:message for="cns" />
+
+                        <p:outputLabel value="Alergias"/>
+                        <p:inputText id="alergias" size="50" value="#{meuCadastroMB.usuario.alergias}"/>
+                        <h:message for="alergias" />
+
+                        <p:outputLabel value="Nome para Emergência"/>
+                        <p:inputText id="nomeemergencia" size="30" value="#{meuCadastroMB.usuario.nomeemergencia}" />
+                        <h:message for="nomeemergencia" />
+
+                        <p:outputLabel value="Telefone para Emergência"/>
+                        <p:inputMask id="telefoneemergencia" size="20" value="#{meuCadastroMB.usuario.telefoneemergencia}" mask="99.999-999"/>
+                        <h:message for="telefoneemergencia" />
+
+                        <p:outputLabel value="Plano de Saúde"/>
+                        <p:inputText id="planosaude" size="50" value="#{meuCadastroMB.usuario.planosaude}"/>
+                        <h:message for="planosaude" />
+
+                        <p:outputLabel value="Seguro de Vida"/>
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value1}" itemLabel="Seguro de Vida"/>
+                        <h:message for="segurovida" />
+
+                        <p:outputLabel value="Alterar foto"/>
+                        <p:growl id="messages" showDetail="true" />
+                        <p:fileUpload value="#{fileUploadView.file}"  mode="advanced" fileLimit="1"
+                                      fileLimitMessage="Só é possível escolher uma imagem."/>
+                        <h:message for="foto" /> 
+
+                        <p:commandButton value="Salvar" id="btnEnviar" action="#{meuCadastroMB.salvarUsuario()}" ajax="false" />
+
+                    </h:panelGrid>
+
+                </h:form>
+            </p:panel>
+            <br></br>
+        </ui:define>
+    </ui:composition>
+
+
+</html>
