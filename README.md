@@ -34,7 +34,7 @@
 
 Repita o passo 4 para atualizar os fontes.
 
-Será necessário existir uma conexão Postgre local comum banco `bombeiro` conforme configurado em sala.
+Será necessário existir uma conexão Postgre local comum banco `bancoBombeiro` conforme configurado em sala.
 
 ### Para enviar suas alterações:
 
