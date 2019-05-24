@@ -32,7 +32,7 @@
 
 1. Clique-direito no projeto > Git > Reverter modificações
 
-Repita o passo 3 em diante para atualizar os fontes.
+Repita o passo 4 para atualizar os fontes.
 
 Será necessário existir uma conexão Postgre local comum banco `bombeiro` conforme configurado em sala.
 
