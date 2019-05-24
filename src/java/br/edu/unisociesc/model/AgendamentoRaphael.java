@@ -1,35 +1,44 @@
 package br.edu.unisociesc.model;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
+/**
+ *
+ * @author Raphael
+ */
 public class AgendamentoRaphael {
 
-    private Integer id;
+    private long id;
     private Unidade unidade;
     private Usuario usuario;
     private EstadoAgendamento estado;
     private Date entrada;
     private Date saida;
-    private Date duracao;
+    private long duracao;
 
-    public AgendamentoRaphael(Integer id, Unidade unidade, Usuario usuario, EstadoAgendamento estado, Date entrada, Date saida, Date duracao) {
+    private long calculaDuracao() {
+        return TimeUnit.MINUTES.convert(saida.getTime() - entrada.getTime(), TimeUnit.MILLISECONDS);
+    }
+
+    public AgendamentoRaphael(Integer id, Unidade unidade, Usuario usuario, EstadoAgendamento estado, Date entrada, Date saida) {
         this.id = id;
         this.unidade = unidade;
         this.usuario = usuario;
         this.estado = estado;
         this.entrada = entrada;
         this.saida = saida;
-        this.duracao = duracao;
+        this.duracao = calculaDuracao();
     }
-
+    
     public AgendamentoRaphael() {
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -63,6 +72,7 @@ public class AgendamentoRaphael {
 
     public void setEntrada(Date entrada) {
         this.entrada = entrada;
+        this.duracao = calculaDuracao();
     }
 
     public Date getSaida() {
@@ -70,14 +80,11 @@ public class AgendamentoRaphael {
     }
 
     public void setSaida(Date saida) {
-        this.saida = saida;
+        this.saida   = saida;
+        this.duracao = calculaDuracao();
     }
 
-    public Date getDuracao() {
+    public long getDuracao() {
         return duracao;
-    }
-
-    public void setDuracao(Date duracao) {
-        this.duracao = duracao;
     }
 }

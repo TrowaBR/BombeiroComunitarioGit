@@ -33,9 +33,9 @@
                                 </div>
                             </p:panel>
                             <p>
-                                <p:schedule id="schedule" value="#{scheduleView.eventModel}" locale="pt_BR" widgetVar="myschedule" leftHeaderTemplate="" rightHeaderTemplate="">
-                                    <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                                    <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                                <p:schedule id="schedule" value="#{calendarioController.eventModel}" locale="pt_BR" widgetVar="myschedule" leftHeaderTemplate="" rightHeaderTemplate="">
+                                    <p:ajax event="dateSelect" listener="#{calendarioController.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                                    <p:ajax event="eventSelect" listener="#{calendarioController.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                                 </p:schedule>
                             </p>
                         </div>
@@ -43,16 +43,16 @@
                     <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="fade" hideEffect="fade">
                         <h:panelGrid id="eventDetails" columns="2">
                             <p:outputLabel for="title" value="Usuário:"  />
-                            <p:inputText id="title" value="#{scheduleView.event.title}" disabled="true" />
+                            <p:inputText id="title" value="#{calendarioController.event.title}" disabled="true" />
 
                             <p:outputLabel for="from" value="Início:" />
-                            <p:calendar id="from" value="#{scheduleView.event.startDate}" pattern="dd/MM/yyyy HH:mm" stepMinute="30" showOn="button" disabled="#{!scheduleView.event.editable}" />
+                            <p:calendar id="from" value="#{calendarioController.event.startDate}" pattern="dd/MM/yyyy HH:mm" stepMinute="30" showOn="button" disabled="#{!calendarioController.event.editable}" />
 
                             <p:outputLabel for="to" value="Término:" />
-                            <p:calendar id="to" value="#{scheduleView.event.endDate}" pattern="dd/MM/yyyy HH:mm" stepMinute="30" showOn="button" disabled="#{!scheduleView.event.editable}" />
+                            <p:calendar id="to" value="#{calendarioController.event.endDate}" pattern="dd/MM/yyyy HH:mm" stepMinute="30" showOn="button" disabled="#{!calendarioController.event.editable}" />
 
-                            <p:commandButton value="Cancelar" oncomplete="PF('eventDialog').hide();" rendered="#{scheduleView.event.editable}" />
-                            <p:commandButton id="addButton" styleClass="ui-state-highlight" style="float: right;" value="Salvar" action="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" rendered="#{scheduleView.event.editable}" />
+                            <p:commandButton value="Cancelar" oncomplete="PF('eventDialog').hide();" rendered="#{calendarioController.event.editable}" />
+                            <p:commandButton id="addButton" styleClass="ui-state-highlight" style="float: right;" value="Salvar" action="#{calendarioController.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" rendered="#{calendarioController.event.editable}" />
                         </h:panelGrid>
                     </p:dialog> 
                 </h:form>
@@ -61,6 +61,4 @@
             <br></br>
         </ui:define>
     </ui:composition>
-
-
 </html>
