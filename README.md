@@ -10,6 +10,8 @@
 
 1. Clique-direito no projeto > Controle de Versão > Inicializar Repositório Git
 
+1. Clique-direito no projeto > Git > Adicionar
+
 1. Clique-direito no projeto > Git > Remoto > Puxar
 
    * Marcar `Especificar a Localização do Repositório Git`
@@ -27,6 +29,8 @@
    * Selecionar: `master -> origin/master`
 
    * Pressionar **Finalizar**
+
+1. Clique-direito no projeto > Git > Reverter modificações
 
 Repita o passo 3 em diante para atualizar os fontes.
 
