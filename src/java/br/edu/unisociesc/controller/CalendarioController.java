@@ -2,7 +2,6 @@ package br.edu.unisociesc.controller;
 
 import br.edu.unisociesc.model.SolicitacaoAgendamento;
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -21,10 +20,10 @@ public class CalendarioController implements Serializable {
     private static final int NUM_PERIODOS = 6;
 
     private ScheduleModel eventModel;
+    private DefaultScheduleEvent event = new SolicitacaoAgendamento();
+
     private int horasPeriodo;
     private int horasMes;
-
-    private DefaultScheduleEvent event = new SolicitacaoAgendamento();
 
     @PostConstruct
     public void init() {

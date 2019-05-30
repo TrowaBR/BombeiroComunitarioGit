@@ -1,6 +1,8 @@
 package br.edu.unisociesc.dao;
 
 import br.edu.unisociesc.model.AgendamentoRaphael;
+import br.edu.unisociesc.model.Usuario;
+import java.util.Date;
 import java.util.List;
 
 
@@ -13,7 +15,7 @@ public interface CrudAgendamento {
     
     public List<AgendamentoRaphael> list();
 
-    public List<AgendamentoRaphael> listCalendario(AgendamentoRaphael agendamento);
+    public List<AgendamentoRaphael> listCalendario(Date dataInicio, Usuario usuario);
 
     public List<AgendamentoRaphael> listSolicitacoes();
 

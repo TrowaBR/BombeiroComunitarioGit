@@ -2,15 +2,19 @@ package br.edu.unisociesc.model;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
  *
  * @author Raphael
  */
+@Entity
 public class AgendamentoRaphael {
 
     @Id
+    @GeneratedValue
     private long id;
     private Unidade unidade;
     private Usuario usuario;
