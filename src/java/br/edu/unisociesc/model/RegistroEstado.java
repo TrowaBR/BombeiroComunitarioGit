@@ -5,13 +5,13 @@ import java.util.Date;
 public class RegistroEstado {
     
     private Integer id;
-    private AgendamentoRaphael agendamento;
+    private Agendamento agendamento;
     private Usuario usuarioRegistro;
     private Date dataRegistro;
     private EstadoAgendamento estado;
     private String informacoes;
 
-    public RegistroEstado(Integer id, AgendamentoRaphael agendamento, Usuario usuarioRegistro, Date dataRegistro, EstadoAgendamento estado, String informacoes) {
+    public RegistroEstado(Integer id, Agendamento agendamento, Usuario usuarioRegistro, Date dataRegistro, EstadoAgendamento estado, String informacoes) {
         this.id = id;
         this.agendamento = agendamento;
         this.usuarioRegistro = usuarioRegistro;
@@ -31,11 +31,11 @@ public class RegistroEstado {
         this.id = id;
     }
 
-    public AgendamentoRaphael getAgendamento() {
+    public Agendamento getAgendamento() {
         return agendamento;
     }
 
-    public void setAgendamento(AgendamentoRaphael agendamento) {
+    public void setAgendamento(Agendamento agendamento) {
         this.agendamento = agendamento;
     }
 

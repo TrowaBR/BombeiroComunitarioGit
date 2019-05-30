@@ -3,9 +3,9 @@ package br.edu.unisociesc.model;
 public class ConfirmacaoAgendamento {
     
     private int aprovado;
-    private AgendamentoRaphael agendamento;
+    private Agendamento agendamento;
 
-    public ConfirmacaoAgendamento(int aprovado, AgendamentoRaphael agendamento) {
+    public ConfirmacaoAgendamento(int aprovado, Agendamento agendamento) {
         this.aprovado = aprovado;
         this.agendamento = agendamento;
     }
@@ -18,11 +18,11 @@ public class ConfirmacaoAgendamento {
         this.aprovado = aprovado;
     }
 
-    public AgendamentoRaphael getAgendamento() {
+    public Agendamento getAgendamento() {
         return agendamento;
     }
 
-    public void setAgendamento(AgendamentoRaphael agendamento) {
+    public void setAgendamento(Agendamento agendamento) {
         this.agendamento = agendamento;
     }
 

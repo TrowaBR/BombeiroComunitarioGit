@@ -5,22 +5,22 @@ import org.primefaces.model.DefaultScheduleEvent;
 
 public class SolicitacaoAgendamento extends DefaultScheduleEvent {
 
-    private AgendamentoRaphael agendamento;
+    private Agendamento agendamento;
     
     public SolicitacaoAgendamento(Usuario usuario, Unidade unidade, Date start, Date end) {
         super(usuario.getNomeGuerra(), start, end);
-        agendamento = new AgendamentoRaphael(null, unidade, usuario, EstadoAgendamento.Solicitado, start, end);
+        agendamento = new Agendamento(null, unidade, usuario, EstadoAgendamento.Solicitado, start, end);
     }
 
     public SolicitacaoAgendamento() {
-        agendamento = new AgendamentoRaphael();
+        agendamento = new Agendamento();
     }
     
-    public AgendamentoRaphael getAgendamento() {
+    public Agendamento getAgendamento() {
         return agendamento;
     }
 
-    public void setAgendamento(AgendamentoRaphael agendamento) {
+    public void setAgendamento(Agendamento agendamento) {
         this.agendamento = agendamento;
     }
 

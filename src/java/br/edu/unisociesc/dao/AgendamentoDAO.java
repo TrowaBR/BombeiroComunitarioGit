@@ -1,7 +1,7 @@
 package br.edu.unisociesc.dao;
 
 // importação de classes de outros pacotes que vamos utilizar
-import br.edu.unisociesc.model.AgendamentoRaphael;
+import br.edu.unisociesc.model.Agendamento;
 import br.edu.unisociesc.model.EstadoAgendamento;
 import br.edu.unisociesc.model.Usuario;
 import br.edu.unisociesc.utils.HibernateUtil;
@@ -14,7 +14,7 @@ import org.hibernate.Transaction;
 public class AgendamentoDAO implements CrudAgendamento {
 
     @Override
-    public void save(AgendamentoRaphael agendamento) {
+    public void save(Agendamento agendamento) {
         Session session = HibernateUtil.getSessionFactory().openSession(); //https://www.devmedia.com.br/entendendo-hibernate-session/29215
         Transaction t = session.beginTransaction(); // transação para acessar a base de dados
         session.save(agendamento); // salvando o objeto do tipo usuário na sessão
@@ -23,13 +23,13 @@ public class AgendamentoDAO implements CrudAgendamento {
     }
 
     @Override
-    public AgendamentoRaphael get(long id) {
+    public Agendamento get(long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return (AgendamentoRaphael) session.load(AgendamentoRaphael.class, id);
+        return (Agendamento) session.load(Agendamento.class, id);
     }
 
     @Override
-    public List<AgendamentoRaphael> list() {
+    public List<Agendamento> list() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         List lista = session.createQuery("from Agendamento").list();  // estou colocando um select simples pra trazer todos os registros
@@ -38,7 +38,7 @@ public class AgendamentoDAO implements CrudAgendamento {
     }
 
     @Override
-    public void remove(AgendamentoRaphael usuario) {
+    public void remove(Agendamento usuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         session.delete(usuario);
@@ -46,7 +46,7 @@ public class AgendamentoDAO implements CrudAgendamento {
     }
 
     @Override
-    public void update(AgendamentoRaphael agendamento) {
+    public void update(Agendamento agendamento) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         session.update(agendamento);
@@ -54,7 +54,7 @@ public class AgendamentoDAO implements CrudAgendamento {
     }
 
     @Override
-    public List<AgendamentoRaphael> listCalendario(Date dataInicio, Usuario usuario) {
+    public List<Agendamento> listCalendario(Date dataInicio, Usuario usuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         List lista = session.createQuery("from Agendamento").list();
@@ -63,7 +63,7 @@ public class AgendamentoDAO implements CrudAgendamento {
     }
 
     @Override
-    public List<AgendamentoRaphael> listSolicitacoes() {
+    public List<Agendamento> listSolicitacoes() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         List lista = null;//session.createQuery("from Agendamento where status = " + EstadoAgendamento.Solicitado.getId()).list();
@@ -72,7 +72,7 @@ public class AgendamentoDAO implements CrudAgendamento {
     }
 
     @Override
-    public List<AgendamentoRaphael> listConfirmacoes() {
+    public List<Agendamento> listConfirmacoes() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         List lista = null;//session.createQuery("from Agendamento where status = " + EstadoAgendamento.Aprovado.getId() + " and termino <= " new Date()).list();

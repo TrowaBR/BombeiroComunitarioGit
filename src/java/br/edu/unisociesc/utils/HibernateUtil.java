@@ -1,5 +1,6 @@
 package br.edu.unisociesc.utils;
 
+import br.edu.unisociesc.model.Agendamento;
 import br.edu.unisociesc.model.Livro;
 import br.edu.unisociesc.model.Usuario;
 import org.hibernate.SessionFactory;
@@ -30,6 +31,7 @@ public class HibernateUtil {
                 AnnotationConfiguration db = new AnnotationConfiguration();
                 db.addAnnotatedClass(Livro.class);
                 db.addAnnotatedClass(Usuario.class);
+                db.addAnnotatedClass(Agendamento.class);
                 // vamos pedir para ler a configuração e abrir a sessão
                 sessionFactory = db.configure().buildSessionFactory();
 
