@@ -17,20 +17,20 @@ import org.primefaces.model.ScheduleModel;
 @ViewScoped
 public class CalendarioController implements Serializable {
 
+    private static final double HORAS_PERIODO = 120;
+    private static final int NUM_PERIODOS = 6;
+
     private ScheduleModel eventModel;
+    private int horasPeriodo;
+    private int horasMes;
 
     private DefaultScheduleEvent event = new SolicitacaoAgendamento();
 
     @PostConstruct
     public void init() {
         eventModel = new DefaultScheduleModel();
-    }
-
-    public Date getInitialDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), Calendar.MONTH, calendar.get(Calendar.DATE), 0, 0, 0);
-
-        return calendar.getTime();
+        horasPeriodo = 35;
+        horasMes = 18;
     }
 
     public ScheduleModel getEventModel() {
@@ -44,7 +44,23 @@ public class CalendarioController implements Serializable {
     public void setEvent(ScheduleEvent event) {
         this.event = (SolicitacaoAgendamento) event;
     }
+
+    public int getHorasPeriodo() {
+        return horasPeriodo;
+    }
+
+    public int getPercPeriodo() {
+        return (int) (100.0 * horasPeriodo / HORAS_PERIODO);
+    }
+
+    public int getHorasMes() {
+        return horasMes;
+    }
     
+    public int getPercMes() {
+        return (int) (100.0 * horasMes / (HORAS_PERIODO / NUM_PERIODOS));
+    }
+
     public void addEvent() {
         event.setEditable(false);
         if (event.getId() == null) {

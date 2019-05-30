@@ -2,6 +2,7 @@ package br.edu.unisociesc.model;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import javax.persistence.Id;
 
 /**
  *
@@ -9,6 +10,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class AgendamentoRaphael {
 
+    @Id
     private long id;
     private Unidade unidade;
     private Usuario usuario;

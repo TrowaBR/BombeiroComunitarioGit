@@ -18,8 +18,8 @@
                     <div style="max-width: 1000px; margin: auto;">
                         <h1>Calendário</h1>
                         <p:separator />
-                        <p><p:progressBar value="29" labelTemplate="Horas semestrais: 35 ({value}%)" displayOnly="true"/></p>
-                        <p><p:progressBar value="90" labelTemplate="Horas mensais: 18 ({value}%)" displayOnly="true"/></p>
+                        <p><p:progressBar value="#{calendarioController.getPercPeriodo()}" labelTemplate="Horas semestrais: #{calendarioController.horasPeriodo} ({value}%)" displayOnly="true"/></p>
+                        <p><p:progressBar value="#{calendarioController.getPercMes()}" labelTemplate="Horas mensais: #{calendarioController.horasMes} ({value}%)" displayOnly="true"/></p>
                         <div style="text-align: center">
                             <p:panel style="display: inline-block">
                                 <div style="text-align: left">
