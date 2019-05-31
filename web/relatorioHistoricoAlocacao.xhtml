@@ -7,7 +7,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-
+    
     <ui:composition template="layout.xhtml">
         <ui:define name="content">
             <p:panel>
@@ -16,28 +16,28 @@
                 <br></br>
                 <h:form id="formrelHorasAlocacaoo">
 
-                    <p:dataTable class="table" var="user" value="#{relatorioHistoricoAlocacao.agendamentoLista}" sortMode="multiple">
+                    <p:dataTable class="table" var="user" value="#{histAlocacaoController.agendamentoLista}" sortMode="multiple" paginator="true" rows="10" emptyMessage="Não há agendamentos cadastrados">
 
                         <f:facet name="header">
                             Histórico de Alocação
                         </f:facet>
-                        <p:column headerText="Pelotão" sortBy="#{user.pelotao}">
-                            <h:outputText value="#{user.pelotao}" />
+                        <p:column headerText="Pelotão" sortBy="#{user.unidade.nome}">
+                            <h:outputText value="#{user.unidade.nome}" />
                         </p:column>
 
-                        <p:column headerText="Usuário" sortBy="#{user.usuario}">
-                            <h:outputText value="#{user.usuario}" />
+                        <p:column headerText="Usuário" sortBy="#{user.usuario.nome}">
+                            <h:outputText value="#{user.usuario.nome}" />
                         </p:column>
 
-                        <p:column headerText="Entrada" sortBy="#{user.dt_entrada}">
-                            <h:outputText value="#{user.dt_entrada}" />
+                        <p:column headerText="Entrada" sortBy="#{user.entrada}">
+                            <h:outputText value="#{user.entrada}" />
                         </p:column>
 
-                        <p:column headerText="Saída" sortBy="#{user.dt_saida}">
-                            <h:outputText value="#{user.dt_saida}" />
+                        <p:column headerText="Saída" sortBy="#{user.saida}">
+                            <h:outputText value="#{user.saida}" />
                         </p:column>
-                        <p:column headerText="Horas" sortBy="#{user.tot_horas}">
-                            <h:outputText value="#{user.tot_horas}" />
+                        <p:column headerText="Horas" sortBy="#{user.duracao}">
+                            <h:outputText value="#{user.duracao}" />
                         </p:column>
 
 

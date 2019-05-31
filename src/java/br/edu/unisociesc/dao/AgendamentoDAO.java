@@ -79,4 +79,16 @@ public class AgendamentoDAO implements CrudAgendamento {
         t.commit();
         return lista;
     }
+    
+    
+    public List<Agendamento> listAprovado() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        List lista = session.createQuery("from Agendamento").list();  // Incluir where para buscar apenas agendamentos 'PRESENTES'
+        t.commit();
+        return lista; // vai retornar um objeto do tipo lista de usuário, nessa lista somente tem usuários
+    }
+    
+
+    
 }
