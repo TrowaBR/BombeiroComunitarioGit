@@ -30,11 +30,43 @@ public class AgendamentoDAO implements CrudAgendamento {
 
     @Override
     public List<Agendamento> list() {
+        return list(null);
+    }
+
+    @Override
+    public List<Agendamento> list(EstadoAgendamento estado) {
+        return list(estado, null);
+    }
+
+    @Override
+    public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio) {
+        return list(estado, dataInicio, null);
+    }
+
+    @Override
+    public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio, Usuario usuario) {
+        String sql = "from Agendamento";
+        String aux = " where ";
+        
+        if (estado != null) {
+            sql += aux + "(usuario = " + estado.ordinal() + ")";
+            aux = " and ";
+        }
+
+        if (dataInicio != null) {
+            sql += aux + "(usuario = " + dataInicio.toString() + ")";
+            aux = " and ";
+        }
+
+        if (usuario != null) {
+            sql += aux + "(usuario = " + usuario.getId() + ")";
+        }
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Agendamento").list();  // estou colocando um select simples pra trazer todos os registros
+        List lista = session.createQuery(sql).list();
         t.commit();
-        return lista; // vai retornar um objeto do tipo lista de usuário, nessa lista somente tem usuários
+        return lista;
     }
 
     @Override
@@ -51,32 +83,5 @@ public class AgendamentoDAO implements CrudAgendamento {
         Transaction t = session.beginTransaction();
         session.update(agendamento);
         t.commit();
-    }
-
-    @Override
-    public List<Agendamento> listCalendario(Date dataInicio, Usuario usuario) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Agendamento").list();
-        t.commit();
-        return lista;
-    }
-
-    @Override
-    public List<Agendamento> listSolicitacoes() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
-        List lista = null;//session.createQuery("from Agendamento where status = " + EstadoAgendamento.Solicitado.getId()).list();
-        t.commit();
-        return lista;
-    }
-
-    @Override
-    public List<Agendamento> listConfirmacoes() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
-        List lista = null;//session.createQuery("from Agendamento where status = " + EstadoAgendamento.Aprovado.getId() + " and termino <= " new Date()).list();
-        t.commit();
-        return lista;
     }
 }

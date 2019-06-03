@@ -1,6 +1,10 @@
 package br.edu.unisociesc.controller;
 
-import br.edu.unisociesc.model.SolicitacaoAgendamento;
+import br.edu.unisociesc.dao.AgendamentoDAO;
+import br.edu.unisociesc.model.AgendamentoScheduleEvent;
+import br.edu.unisociesc.model.TiposGraduacao;
+import br.edu.unisociesc.model.Unidade;
+import br.edu.unisociesc.model.Usuario;
 import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.PostConstruct;
@@ -16,11 +20,14 @@ import org.primefaces.model.ScheduleModel;
 @ViewScoped
 public class CalendarioController implements Serializable {
 
+    private static final Usuario USUARIO_FIXO = new Usuario(1, "BC Hening", "Hening", new Date(), "M", TiposGraduacao.BC, new Date(), "123", "", 0, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+    private static final Unidade UNIDADE_FIXA = new Unidade("Centro", new Date(), new Date(), 0, 0, new Date(), new Date(), new Date(), new Date(), true, "", "", 0, "");
+
     private static final double HORAS_PERIODO = 120;
     private static final int NUM_PERIODOS = 6;
 
     private ScheduleModel eventModel;
-    private DefaultScheduleEvent event = new SolicitacaoAgendamento();
+    private DefaultScheduleEvent event = new AgendamentoScheduleEvent();
 
     private int horasPeriodo;
     private int horasMes;
@@ -41,7 +48,7 @@ public class CalendarioController implements Serializable {
     }
 
     public void setEvent(ScheduleEvent event) {
-        this.event = (SolicitacaoAgendamento) event;
+        this.event = (AgendamentoScheduleEvent) event;
     }
 
     public int getHorasPeriodo() {
@@ -61,6 +68,8 @@ public class CalendarioController implements Serializable {
     }
 
     public void addEvent() {
+        AgendamentoDAO dao = new AgendamentoDAO();
+        dao.save(((AgendamentoScheduleEvent) event).getAgendamento());
         event.setEditable(false);
         if (event.getId() == null) {
             eventModel.addEvent(event);
@@ -79,6 +88,6 @@ public class CalendarioController implements Serializable {
         Date start = (Date) selectEvent.getObject();
         Date end   = (Date) selectEvent.getObject();
 
-        event = new DefaultScheduleEvent("BC Hening", start, end);
+        event = new AgendamentoScheduleEvent(USUARIO_FIXO, UNIDADE_FIXA, start, end);
     }
 }

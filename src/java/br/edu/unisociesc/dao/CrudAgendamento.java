@@ -1,6 +1,7 @@
 package br.edu.unisociesc.dao;
 
 import br.edu.unisociesc.model.Agendamento;
+import br.edu.unisociesc.model.EstadoAgendamento;
 import br.edu.unisociesc.model.Usuario;
 import java.util.Date;
 import java.util.List;
@@ -15,11 +16,11 @@ public interface CrudAgendamento {
     
     public List<Agendamento> list();
 
-    public List<Agendamento> listCalendario(Date dataInicio, Usuario usuario);
+    public List<Agendamento> list(EstadoAgendamento estado);
 
-    public List<Agendamento> listSolicitacoes();
+    public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio);
 
-    public List<Agendamento> listConfirmacoes();
+    public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio, Usuario usuario);
 
     public void remove(Agendamento agendamento);
 
