@@ -84,4 +84,43 @@ public class AgendamentoDAO implements CrudAgendamento {
         session.update(agendamento);
         t.commit();
     }
+
+    @Override
+    public List<Agendamento> listCalendario(Date dataInicio, Usuario usuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        List lista = session.createQuery("from Agendamento").list();
+        t.commit();
+        return lista;
+    }
+
+    @Override
+    public List<Agendamento> listSolicitacoes() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        List lista = null;//session.createQuery("from Agendamento where status = " + EstadoAgendamento.Solicitado.getId()).list();
+        t.commit();
+        return lista;
+    }
+
+    @Override
+    public List<Agendamento> listConfirmacoes() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        List lista = null;//session.createQuery("from Agendamento where status = " + EstadoAgendamento.Aprovado.getId() + " and termino <= " new Date()).list();
+        t.commit();
+        return lista;
+    }
+    
+    
+    public List<Agendamento> listAprovado() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        List lista = session.createQuery("from Agendamento").list();  // Incluir where para buscar apenas agendamentos 'PRESENTES'
+        t.commit();
+        return lista; // vai retornar um objeto do tipo lista de usuário, nessa lista somente tem usuários
+    }
+    
+
+    
 }
