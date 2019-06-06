@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
@@ -27,14 +26,24 @@ public class CalendarioController implements Serializable {
     private static final int NUM_PERIODOS = 6;
 
     private ScheduleModel eventModel;
-    private DefaultScheduleEvent event = new AgendamentoScheduleEvent();
+    private AgendamentoScheduleEvent event;
 
     private int horasPeriodo;
     private int horasMes;
+    
+    private AgendamentoScheduleEvent novoAgendamento() {
+        return novoAgendamento(new Date(), new Date());
+    }
+
+    private AgendamentoScheduleEvent novoAgendamento(Date start, Date end) {
+        //return new AgendamentoScheduleEvent(USUARIO_FIXO, UNIDADE_FIXA, start, end);
+        return new AgendamentoScheduleEvent(null, null, null, null);
+    }
 
     @PostConstruct
     public void init() {
         eventModel = new DefaultScheduleModel();
+        event = new AgendamentoScheduleEvent(); //novoAgendamento();
         horasPeriodo = 35;
         horasMes = 18;
     }
@@ -69,7 +78,7 @@ public class CalendarioController implements Serializable {
 
     public void addEvent() {
         AgendamentoDAO dao = new AgendamentoDAO();
-        dao.save(((AgendamentoScheduleEvent) event).getAgendamento());
+        dao.save(event.getAgendamento());
         event.setEditable(false);
         if (event.getId() == null) {
             eventModel.addEvent(event);
@@ -77,17 +86,17 @@ public class CalendarioController implements Serializable {
             eventModel.updateEvent(event);
         }
 
-        event = new DefaultScheduleEvent();
+        event = novoAgendamento();
     }
 
     public void onEventSelect(SelectEvent selectEvent) {
-        event = (DefaultScheduleEvent) selectEvent.getObject();
+        event = (AgendamentoScheduleEvent) selectEvent.getObject();
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
         Date start = (Date) selectEvent.getObject();
         Date end   = (Date) selectEvent.getObject();
 
-        event = new AgendamentoScheduleEvent(USUARIO_FIXO, UNIDADE_FIXA, start, end);
+        event = novoAgendamento(start, end);
     }
 }
