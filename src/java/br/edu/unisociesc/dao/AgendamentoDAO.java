@@ -49,12 +49,12 @@ public class AgendamentoDAO implements CrudAgendamento {
         String aux = " where ";
         
         if (estado != null) {
-            sql += aux + "(usuario = " + estado.ordinal() + ")";
+            sql += aux + "(estado = " + estado.ordinal() + ")";
             aux = " and ";
         }
 
         if (dataInicio != null) {
-            sql += aux + "(usuario = " + dataInicio.toString() + ")";
+            sql += aux + "(inicio = " + dataInicio.toString() + ")";
             aux = " and ";
         }
 
