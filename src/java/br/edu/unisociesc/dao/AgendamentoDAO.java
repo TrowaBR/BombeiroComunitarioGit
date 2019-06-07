@@ -30,21 +30,26 @@ public class AgendamentoDAO implements CrudAgendamento {
 
     @Override
     public List<Agendamento> list() {
-        return list(null);
+        return list(null, null, null, null);
     }
 
     @Override
     public List<Agendamento> list(EstadoAgendamento estado) {
-        return list(estado, null);
+        return list(estado, null, null, null);
     }
 
     @Override
     public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio) {
-        return list(estado, dataInicio, null);
+        return list(estado, dataInicio, null, null);
+    }
+    
+    @Override
+    public List<Agendamento> listTermino(EstadoAgendamento estado, Date dataTermino) {
+        return list(estado, null, dataTermino, null);
     }
 
     @Override
-    public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio, Usuario usuario) {
+    public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio, Date dataTermino, Usuario usuario) {
         String sql = "from Agendamento";
         String aux = " where ";
         
@@ -54,7 +59,12 @@ public class AgendamentoDAO implements CrudAgendamento {
         }
 
         if (dataInicio != null) {
-            sql += aux + "(inicio = " + dataInicio.toString() + ")";
+            sql += aux + "(inicio >= " + dataInicio.toString() + ")";
+            aux = " and ";
+        }
+        
+        if (dataTermino != null) {
+            sql += aux + "(termino <= " + dataTermino.toString() + ")";
             aux = " and ";
         }
 

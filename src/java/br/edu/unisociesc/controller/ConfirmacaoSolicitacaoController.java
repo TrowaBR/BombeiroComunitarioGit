@@ -11,30 +11,30 @@ import javax.faces.model.ListDataModel;
 @ManagedBean
 public class ConfirmacaoSolicitacaoController {
 
-    private DataModel listaConfirmacaoAgendamento;
+    private DataModel listaSolicitacaoAgendamento;
     List<Agendamento> lista;
 
     private void atualizaLista() {
         lista = new AgendamentoDAO().list(EstadoAgendamento.Solicitado);
-        listaConfirmacaoAgendamento = new ListDataModel(lista);
+        listaSolicitacaoAgendamento = new ListDataModel(lista);
     }
 
     public DataModel getLista() {
-        if (listaConfirmacaoAgendamento == null) {
+        if (listaSolicitacaoAgendamento == null) {
             atualizaLista();
         }
-        return listaConfirmacaoAgendamento;
+        return listaSolicitacaoAgendamento;
     }
          
     public void aprovar(){
-        Agendamento agendamento = (Agendamento) listaConfirmacaoAgendamento.getRowData();
+        Agendamento agendamento = (Agendamento) listaSolicitacaoAgendamento.getRowData();
         agendamento.setEstado(EstadoAgendamento.Aprovado);
         new AgendamentoDAO().update(agendamento);
         atualizaLista();
     }
     
     public void reprovar(){
-        Agendamento agendamento = (Agendamento) listaConfirmacaoAgendamento.getRowData();
+        Agendamento agendamento = (Agendamento) listaSolicitacaoAgendamento.getRowData();
         agendamento.setEstado(EstadoAgendamento.Reprovado);
         new AgendamentoDAO().update(agendamento);
         atualizaLista();

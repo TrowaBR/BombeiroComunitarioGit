@@ -20,7 +20,9 @@ public interface CrudAgendamento {
 
     public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio);
 
-    public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio, Usuario usuario);
+    public List<Agendamento> listTermino(EstadoAgendamento estado, Date dataTermino);
+
+    public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio, Date dataTermino, Usuario usuario);
 
     public void remove(Agendamento agendamento);
 
