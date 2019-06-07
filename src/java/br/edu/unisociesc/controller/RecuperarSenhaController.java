@@ -13,7 +13,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class UsuarioController {   // criação da classe
+public class RecuperarSenhaController {   // criação da classe
 
     private Usuario usuario;
     private DataModel listaUsuarios;
@@ -33,33 +33,9 @@ public class UsuarioController {   // criação da classe
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-    public String prepararAlterarUsuario() {
-        usuario = (Usuario) (listaUsuarios.getRowData());
+    
+    public String recuperarSenha() {
+        if ()
         return "cadastrarUsuario";
-    }
-
-    public String excluirUsuario() {
-        Usuario usuario = (Usuario) (listaUsuarios.getRowData());
-        UsuarioDAO dao = new UsuarioDAO();
-        dao.remove(usuario);
-        return "listarUsuarios";
-    }
-
-    public String adicionarUsuario() {
-        UsuarioDAO dao = new UsuarioDAO();
-        dao.save(usuario);
-        return "listarUsuarios";
-    }
-
-    public String alterarUsuario() {
-        UsuarioDAO dao = new UsuarioDAO();
-        dao.update(usuario);
-        return "listarUsuarios";
-    }
-
-    public void prepararAdicionarUsuario() {
-        usuario = new Usuario();
-
     }
 }

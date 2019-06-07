@@ -17,17 +17,11 @@ public class RecuperarSenha {
     public int getCpf() {
         return cpf;
     }
-
-    public RecuperarSenha(int rg, int cpf, String email) {
-        this.rg = rg;
-        this.cpf = cpf;
-        this.email = email;
-    }
-
+    
     public String getEmail() {
         return email;
     }
-
+    
     public void setRg(int rg) {
         this.rg = rg;
     }
@@ -37,6 +31,12 @@ public class RecuperarSenha {
     }
 
     public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public RecuperarSenha(int rg, int cpf, String email) {
+        this.rg = rg;
+        this.cpf = cpf;
         this.email = email;
     }
 }
