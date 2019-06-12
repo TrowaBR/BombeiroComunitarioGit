@@ -1,29 +1,45 @@
 package br.edu.unisociesc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author Raphael
  */
 @Entity
-public class Agendamento {
+public class Agendamento implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+
+    @JoinColumn(name = "unidade_id", referencedColumnName = "id", /*nullable=false,*/ insertable=false, updatable=false)
     private Unidade unidade;
+
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id", /*nullable=false,*/ insertable=false, updatable=false)
     private Usuario usuario;
+
     @Enumerated(EnumType.ORDINAL)
     private EstadoAgendamento estado;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date entrada;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date saida;
+
     private long duracao;
 
     private long calculaDuracao() {

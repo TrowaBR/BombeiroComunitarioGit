@@ -2,7 +2,9 @@ package br.edu.unisociesc.utils;
 
 import br.edu.unisociesc.model.Agendamento;
 import br.edu.unisociesc.model.Livro;
+import br.edu.unisociesc.model.Unidade;
 import br.edu.unisociesc.model.Usuario;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
@@ -31,11 +33,12 @@ public class HibernateUtil {
                 AnnotationConfiguration db = new AnnotationConfiguration();
                 db.addAnnotatedClass(Livro.class);
                 db.addAnnotatedClass(Usuario.class);
+                db.addAnnotatedClass(Unidade.class);
                 db.addAnnotatedClass(Agendamento.class);
                 // vamos pedir para ler a configuração e abrir a sessão
                 sessionFactory = db.configure().buildSessionFactory();
 
-            } catch (Exception e) {
+            } catch (HibernateException e) {
                 /* qualquer excessão que ocorrer será tratada
                  */
                 System.out.println("Erro ao criar conexão: " + e.getMessage());

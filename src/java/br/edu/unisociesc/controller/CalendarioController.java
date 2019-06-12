@@ -1,6 +1,8 @@
 package br.edu.unisociesc.controller;
 
 import br.edu.unisociesc.dao.AgendamentoDAO;
+import br.edu.unisociesc.dao.UnidadeDAO;
+import br.edu.unisociesc.dao.UsuarioDAO;
 import br.edu.unisociesc.model.AgendamentoScheduleEvent;
 import br.edu.unisociesc.model.TiposGraduacao;
 import br.edu.unisociesc.model.Unidade;
@@ -19,8 +21,8 @@ import org.primefaces.model.ScheduleModel;
 @ViewScoped
 public class CalendarioController implements Serializable {
 
-    private static final Usuario USUARIO_FIXO = new Usuario(1, "BC Hening", "Hening", new Date(), "M", TiposGraduacao.BC, new Date(), "123", "", 0, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-    private static final Unidade UNIDADE_FIXA = new Unidade("Centro", new Date(), new Date(), 0, 0, new Date(), new Date(), new Date(), new Date(), true, "", "", 0, "");
+    private Usuario usuario_fixo;
+    private Unidade unidade_fixa;
 
     private static final double HORAS_PERIODO = 120;
     private static final int NUM_PERIODOS = 6;
@@ -36,14 +38,16 @@ public class CalendarioController implements Serializable {
     }
 
     private AgendamentoScheduleEvent novoAgendamento(Date start, Date end) {
-        //return new AgendamentoScheduleEvent(USUARIO_FIXO, UNIDADE_FIXA, start, end);
-        return new AgendamentoScheduleEvent(null, null, null, null);
+        return new AgendamentoScheduleEvent(usuario_fixo, unidade_fixa, start, end);
     }
 
     @PostConstruct
     public void init() {
+        usuario_fixo = new Usuario(1, "BC Hening", "Hening", new Date(), "M", TiposGraduacao.BC, new Date(), "123", "", 0, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        unidade_fixa = new Unidade(1, "Centro", new Date(), new Date(), 0, 0, new Date(), new Date(), new Date(), new Date(), true, "", "", 0, "");
+
         eventModel = new DefaultScheduleModel();
-        event = new AgendamentoScheduleEvent(); //novoAgendamento();
+        event = novoAgendamento();
         horasPeriodo = 35;
         horasMes = 18;
     }

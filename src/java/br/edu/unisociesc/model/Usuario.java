@@ -1,22 +1,27 @@
 package br.edu.unisociesc.model;// referencia para o pacote
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 @Entity //Uma entity é um objeto leve de domínio persistente utilizado para representar uma tabela da base de dados, sendo que cada instância da entity corresponde a uma linha da tabela. 
-public class Usuario { // criação da classe
+public class Usuario implements Serializable { // criação da classe
 
     // declaração de atributos
     @Id  //A anotação I@Id é utilizada para informar ao JPA qual campo/atributo de uma entidade estará relacionado à chave primária da respectiva tabela no banco de dados. Essa é uma anotação obrigatória e um erro será gerado em tempo de execução caso ela não esteja presente.
-    @GeneratedValue  // ID que serão automaticamente criados
+    @GeneratedValue(strategy = GenerationType.AUTO)  // ID que serão automaticamente criados
     private long id;
     private String nomeGuerra;
     private String nomeCompleto;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
     private String sexo;
     private TiposGraduacao graduacao;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataGraduacao;
     private String senha;
     private String endereco;
