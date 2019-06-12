@@ -4,6 +4,8 @@ import br.edu.unisociesc.model.Agendamento;
 import br.edu.unisociesc.model.Livro;
 import br.edu.unisociesc.model.Unidade;
 import br.edu.unisociesc.model.Usuario;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -16,6 +18,7 @@ public class HibernateUtil {
      */
     // ops não esqueça de importar do pacote correto: deve ser o pacote org.hibernate
     private static SessionFactory sessionFactory;
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 
     public HibernateUtil() {
     }
@@ -49,6 +52,10 @@ public class HibernateUtil {
             return sessionFactory;
         }
 
+    }
+    
+    public static String datePostgre(Date date) {
+        return format.format(date);
     }
 
 }
