@@ -3,18 +3,18 @@ package br.edu.unisociesc.model;
 
 public class RecuperarSenha {
 
-    private int rg;
-    private int cpf;
+    private String rg;
+    private String cpf;
     private String email;
 
     public RecuperarSenha() {
     }
 
-    public int getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
     
@@ -22,11 +22,11 @@ public class RecuperarSenha {
         return email;
     }
     
-    public void setRg(int rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -34,7 +34,7 @@ public class RecuperarSenha {
         this.email = email;
     }
 
-    public RecuperarSenha(int rg, int cpf, String email) {
+    public RecuperarSenha(String rg, String cpf, String email) {
         this.rg = rg;
         this.cpf = cpf;
         this.email = email;

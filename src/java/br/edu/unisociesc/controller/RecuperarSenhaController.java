@@ -1,7 +1,10 @@
 package br.edu.unisociesc.controller;  // referencia para o pacote
 
 import br.edu.unisociesc.dao.UsuarioDAO;
+import br.edu.unisociesc.dao.RecuperarSenhaDAO;
 import br.edu.unisociesc.model.Usuario;
+import br.edu.unisociesc.model.RecuperarSenha;
+
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,7 +18,7 @@ import javax.faces.model.ListDataModel;
 @SessionScoped
 public class RecuperarSenhaController {   // criação da classe
 
-    private Usuario usuario;
+    private RecuperarSenha dados = new RecuperarSenha();
     private DataModel listaUsuarios;
 
     //DataModel é uma classe que disponibiliza-se com dados de uma tabela… 
@@ -26,16 +29,23 @@ public class RecuperarSenhaController {   // criação da classe
         return listaUsuarios;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String recuperarSenha() {
+        RecuperarSenhaDAO dao = new RecuperarSenhaDAO();
+        List<Usuario> lista = dao.list(dados.getRg(), dados.getCpf(), dados.getEmail());
+        if (lista.isEmpty()) {
+            
+        } else {
+            return "cadastrarUsuario";
+        }
+        return null;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public RecuperarSenha getDados() {
+        return dados;
     }
-    
-    public String recuperarSenha() {
-        if ()
-        return "cadastrarUsuario";
+
+    public void setDados(RecuperarSenha dados) {
+        this.dados = dados;
     }
+
 }

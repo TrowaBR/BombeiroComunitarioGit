@@ -17,11 +17,11 @@
         <p:panel style="margin: auto; width: 500px; margin-top: 150px" header="Para recuperar seus dados de acesso, informe RG, CPF e E-Mail:" >
             <p:panelGrid columns="2" style="align-content: center; margin-left: 90px">  
                 <h:outputLabel value="RG"  />
-                <p:inputText value="#{recuperarSenhaController.usuario.rg}" maxlength="7" />
+                <p:inputText value="#{recuperarSenhaController.dados.rg}" maxlength="7" />
                 <h:outputLabel value="CPF" />
-                <p:inputText value="#{recuperarSenhaController.usuario.cpf}" maxlength="11" />
+                <p:inputText value="#{recuperarSenhaController.dados.cpf}" maxlength="11" />
                 <h:outputLabel value="E-mail" />
-                <p:inputText value="#{recuperarSenhaController.usuario.email}" />
+                <p:inputText value="#{recuperarSenhaController.dados.email}" />
             </p:panelGrid> 
             <br />
 
