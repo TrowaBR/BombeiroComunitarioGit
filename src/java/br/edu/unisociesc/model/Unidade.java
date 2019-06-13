@@ -1,17 +1,33 @@
 package br.edu.unisociesc.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
 
-public class Unidade {
+@Entity
+public class Unidade implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String descricao;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date horasMinimas;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date horasMaximas;
     private int leitosMasculinos;
     private int leitosFemininos;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date horaInicioMasculino;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date horaInicioFeminino;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date horaTerminoMasculino;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date horaTerminoFeminino;
     private boolean ativo;
     private String endereco;
@@ -19,7 +35,8 @@ public class Unidade {
     private int cep;
     private String cidade;
 
-    public Unidade(String descricao, Date horasMinimas, Date horasMaximas, int leitosMasculinos, int leitosFemininos, Date horaInicioMasculino, Date horaInicioFeminino, Date horaTerminoMasculino, Date horaTerminoFeminino, boolean ativo, String endereco, String pontoReferencia, int cep, String cidade) {
+    public Unidade(long id, String descricao, Date horasMinimas, Date horasMaximas, int leitosMasculinos, int leitosFemininos, Date horaInicioMasculino, Date horaInicioFeminino, Date horaTerminoMasculino, Date horaTerminoFeminino, boolean ativo, String endereco, String pontoReferencia, int cep, String cidade) {
+        this.id = id;
         this.descricao = descricao;
         this.horasMinimas = horasMinimas;
         this.horasMaximas = horasMaximas;
@@ -149,6 +166,14 @@ public class Unidade {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

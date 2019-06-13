@@ -5,18 +5,18 @@ import java.util.Date;
 public class RegistroEstado {
     
     private Integer id;
-    private Usuario usuario;
-    private AgendamentoRaphael agendamento;
+    private Agendamento agendamento;
+    private Usuario usuarioRegistro;
+    private Date dataRegistro;
     private EstadoAgendamento estado;
-    private Date dataEntrada;
     private String informacoes;
 
-    public RegistroEstado(Integer id, Usuario usuario, AgendamentoRaphael agendamento, EstadoAgendamento estado, Date dataEntrada, String informacoes) {
+    public RegistroEstado(Integer id, Agendamento agendamento, Usuario usuarioRegistro, Date dataRegistro, EstadoAgendamento estado, String informacoes) {
         this.id = id;
-        this.usuario = usuario;
         this.agendamento = agendamento;
+        this.usuarioRegistro = usuarioRegistro;
+        this.dataRegistro = dataRegistro;
         this.estado = estado;
-        this.dataEntrada = dataEntrada;
         this.informacoes = informacoes;
     }
 
@@ -31,20 +31,28 @@ public class RegistroEstado {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public AgendamentoRaphael getAgendamento() {
+    public Agendamento getAgendamento() {
         return agendamento;
     }
 
-    public void setAgendamento(AgendamentoRaphael agendamento) {
+    public void setAgendamento(Agendamento agendamento) {
         this.agendamento = agendamento;
+    }
+
+    public Usuario getUsuarioRegistro() {
+        return usuarioRegistro;
+    }
+
+    public void setUsuarioRegistro(Usuario usuarioRegistro) {
+        this.usuarioRegistro = usuarioRegistro;
+    }
+
+    public Date getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 
     public EstadoAgendamento getEstado() {
@@ -53,14 +61,6 @@ public class RegistroEstado {
 
     public void setEstado(EstadoAgendamento estado) {
         this.estado = estado;
-    }
-
-    public Date getDataEntrada() {
-        return dataEntrada;
-    }
-
-    public void setDataEntrada(Date dataEntrada) {
-        this.dataEntrada = dataEntrada;
     }
 
     public String getInformacoes() {

@@ -1,52 +1,52 @@
 package br.edu.unisociesc.dao;
 
 // importação de classes de outros pacotes que vamos utilizar
-import br.edu.unisociesc.model.Usuario;
+import br.edu.unisociesc.model.Unidade;
 import br.edu.unisociesc.utils.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 // Classe que implementa a interface....Todos os métodos da interface a classe deve possuir
-public class UsuarioDAO implements CrudUsuario {
+public class UnidadeDAO implements CrudUnidade {
 
     @Override
-    public void save(Usuario usuario) {
+    public void save(Unidade unidade) {
         Session session = HibernateUtil.getSessionFactory().openSession(); //https://www.devmedia.com.br/entendendo-hibernate-session/29215
         Transaction t = session.beginTransaction(); // transação para acessar a base de dados
-        session.save(usuario); // salvando o objeto do tipo usuário na sessão
+        session.save(unidade); // salvando o objeto do tipo usuário na sessão
         t.commit(); // comitando o objeto na base de dados
 
     }
 
     @Override
-    public Usuario getUsuario(long id) {
+    public Unidade getUnidade(long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return (Usuario) session.load(Usuario.class, id);
+        return (Unidade) session.load(Unidade.class, id);
     }
 
     @Override
-    public List<Usuario> list() {
+    public List<Unidade> list() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Usuario").list();  // estou colocando um select simples pra trazer todos os registros
+        List lista = session.createQuery("from Unidade").list();  // estou colocando um select simples pra trazer todos os registros
         t.commit();
         return lista; // vai retornar um objeto do tipo lista de usuário, nessa lista somente tem usuários
     }
 
     @Override
-    public void remove(Usuario usuario) {
+    public void remove(Unidade unidade) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        session.delete(usuario);
+        session.delete(unidade);
         t.commit();
     }
 
     @Override
-    public void update(Usuario usuario) {
+    public void update(Unidade unidade) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        session.update(usuario);
+        session.update(unidade);
         t.commit();
     }
 }

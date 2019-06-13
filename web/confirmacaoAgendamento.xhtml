@@ -17,48 +17,39 @@
                 <h:form id="formConfirmacaoAgendamento">
                     <h:panelGroup id="box">
                         <p:panel header="Confirmação de agendamento">
-                            <p:dataTable var=" " value=" ">
+                            <p:dataTable var="agendamento" value="#{confirmacaoAgendamentoController.lista}">
                                 <p:column headerText="Nome">
-                                    <h:outputText value="Nome de teste" /><br />
+                                    <h:outputText value="#{agendamento.usuario.nome}" /><br />
                                 </p:column>
 
                                 <p:column headerText="Data">
-                                    <h:outputText value="aa/aa/aaaa" />
+                                    <h:outputText value="De #{agendamento.entrada} até #{agendamento.saida}" /> 
                                 </p:column>
 
-                                <p:column headerText="Aprovação">
-                                    <p:selectOneRadio id="compareceu" value="">
-                                        <f:selectItem itemLabel="Presença" itemValue="Presença" />
-                                        <f:selectItem itemLabel="Ausência" itemValue="Ausência" />
-                                    </p:selectOneRadio>    
+                                 <p:column headerText="Aprovação">
+                                    <p:button value="Presença" onclick="#{confirmacaoAgendamentoController.presenca()}" /> 
+                                    <p:button value="Ausência" onclick="#{confirmacaoAgendamentoController.ausencia()}" />  
                                 </p:column>
                             </p:dataTable>
                         </p:panel>
                     </h:panelGroup>    
 
-
-
                     <h:panelGroup id="box1" style="padding: 500%"> <!--padding pra fazer a separação dos dois PanelGroup << ESSA É A MINHA TELA, DE CIMA É DO JEDIELSON MAS CRIEI TAMBÉM PRA DEIXAR O XHTML COMPLETO-->
                         <p:panel header="Solicitação de agendamento">
-                            <p:dataTable var=" " value=" ">
+                           <p:dataTable var="agendamento" value="#{confirmacaoSolicitacaoController.lista}">
                                 <p:column headerText="Nome">
-                                    <h:outputText value="Nome de teste" /><br />
+                                    <h:outputText value="#{agendamento.usuario.nome}" /><br />
                                 </p:column>
 
                                 <p:column headerText="Data">
-                                    <h:outputText value="aa/aa/aaaa" />
+                                    <h:outputText value="De #{agendamento.entrada} até #{agendamento.saida}" /> 
                                 </p:column>
 
                                 <p:column headerText="Aprovação">
-                                    <p:button value="Aprovar"> </p:button> 
-                                    <p:commandButton value="Recusar" type="button" onclick="PF('dlg1').show();" /> 
+                                    <p:button value="Aprovar" onclick="#{confirmacaoSolicitacaoController.aprovar()}" /> 
+                                    <p:button value="Recusar" onclick="#{confirmacaoSolicitacaoController.reprovar()}" />
                                 </p:column>
                             </p:dataTable>
-                            <p:dialog header="Informe o motivo para recusar" widgetVar="dlg1" minHeight="40">
-                                <p:inputText />
-                                <p:button style="left: 10px" value="OK"> </p:button> 
-                                <p:button style="left: 10px" value="Cancelar"> </p:button> 
-                            </p:dialog>
                         </p:panel>
                     </h:panelGroup>
                 </h:form>
