@@ -33,7 +33,7 @@ public class RecuperarSenhaController {   // criação da classe
         RecuperarSenhaDAO dao = new RecuperarSenhaDAO();
         List<Usuario> lista = dao.list(dados.getRg(), dados.getCpf(), dados.getEmail());
         if (lista.isEmpty()) {
-            
+            System.out.println("Usuário não cadastrado, favor informe os dados corretos e tente novamente!");
         } else {
             return "cadastrarUsuario";
         }

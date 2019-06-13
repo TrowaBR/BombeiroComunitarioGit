@@ -18,7 +18,7 @@ public class RecuperarSenhaDAO implements CrudRecuperarSenha {
     public List<Usuario> list(String rg, String cpf, String email) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Usuario where (rg = " + rg + ") and (cpf = " + cpf + ") and (e-mail = " + email + ")").list();  // estou colocando um select simples pra trazer todos os registros
+        List lista = session.createQuery("from Usuario where (rg = '" + rg + "') and (cpf = '" + cpf + "') and (email = '" + email + "')").list();  // estou colocando um select simples pra trazer todos os registros
         t.commit();
         return lista; // vai retornar um objeto do tipo lista de usuário, nessa lista somente tem usuários
     }
