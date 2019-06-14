@@ -6,10 +6,13 @@ import br.edu.unisociesc.model.Usuario;
 import br.edu.unisociesc.model.RecuperarSenha;
 
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.swing.JOptionPane;
 
 /*@ManagedBean
  * Anotação que reflete o nome que usaremos para chamar essa classe através da nossa View.
@@ -33,7 +36,7 @@ public class RecuperarSenhaController {   // criação da classe
         RecuperarSenhaDAO dao = new RecuperarSenhaDAO();
         List<Usuario> lista = dao.list(dados.getRg(), dados.getCpf(), dados.getEmail());
         if (lista.isEmpty()) {
-            System.out.println("Usuário não cadastrado, favor informe os dados corretos e tente novamente!");
+
         } else {
             return "cadastrarUsuario";
         }
@@ -47,5 +50,22 @@ public class RecuperarSenhaController {   // criação da classe
     public void setDados(RecuperarSenha dados) {
         this.dados = dados;
     }
+    
+    private String message;
+ 
+    public String getMessage() {
+        return message;
+    }
+ 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+     
+    public void Mensagem() {
+        FacesContext context = FacesContext.getCurrentInstance();
+         
+        context.addMessage(null, new FacesMessage("Erro",  "Usuário não cadastrado, favor informe os dados corretos e tente novamente!") );
 
+    }
 }
+

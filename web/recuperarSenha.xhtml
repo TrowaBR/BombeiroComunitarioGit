@@ -25,7 +25,7 @@
             </p:panelGrid> 
             <br />
 
-            <p:commandButton style="align-content: center" value="Recuperar Senha" action="#{recuperarSenhaController.recuperarSenha()}" />
+            <p:commandButton style="align-content: center" value="Recuperar Senha" action="#{recuperarSenhaController.recuperarSenha()}," action="#{recuperarSenhaController.saveMessage}" update="@form" />
             
         </p:panel>
     </h:form>
