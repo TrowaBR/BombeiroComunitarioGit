@@ -4,11 +4,16 @@ import br.edu.unisociesc.dao.AgendamentoDAO;
 import br.edu.unisociesc.dao.UnidadeDAO;
 import br.edu.unisociesc.dao.UsuarioDAO;
 import br.edu.unisociesc.model.AgendamentoScheduleEvent;
+import br.edu.unisociesc.model.Agendamento;
+import br.edu.unisociesc.model.EstadoAgendamento;
 import br.edu.unisociesc.model.TiposGraduacao;
 import br.edu.unisociesc.model.Unidade;
 import br.edu.unisociesc.model.Usuario;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -38,7 +43,15 @@ public class CalendarioController implements Serializable {
     }
 
     private AgendamentoScheduleEvent novoAgendamento(Date start, Date end) {
-        return new AgendamentoScheduleEvent(usuario_fixo, unidade_fixa, start, end);
+        return novoAgendamento(usuario_fixo, unidade_fixa, start, end);
+    }
+
+    private AgendamentoScheduleEvent novoAgendamento(Usuario usuario, Unidade unidade, Date start, Date end) {
+        return new AgendamentoScheduleEvent(usuario, unidade, start, end);
+    }
+
+    private AgendamentoScheduleEvent novoAgendamento(Agendamento agendamento) {
+        return new AgendamentoScheduleEvent(agendamento.getUsuario(), agendamento.getUnidade(), agendamento.getEntrada(), agendamento.getSaida());
     }
 
     @PostConstruct
@@ -46,13 +59,28 @@ public class CalendarioController implements Serializable {
         usuario_fixo = new Usuario(1, "BC Hening", "Hening", new Date(), "M", TiposGraduacao.BC, new Date(), "123", "", 0, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
         unidade_fixa = new Unidade(1, "Centro", new Date(), new Date(), 0, 0, new Date(), new Date(), new Date(), new Date(), true, "", "", 0, "");
 
-        eventModel = new DefaultScheduleModel();
         event = novoAgendamento();
         horasPeriodo = 35;
         horasMes = 18;
     }
 
     public ScheduleModel getEventModel() {
+        if (eventModel == null) {
+            eventModel = new DefaultScheduleModel();
+            AgendamentoDAO dao = new AgendamentoDAO();
+            Calendar c = GregorianCalendar.getInstance();
+            c.setTime(new Date());
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MILLISECOND, 0);
+            c.set(Calendar.DAY_OF_MONTH, 1);
+            List<Agendamento> lista = dao.list(EstadoAgendamento.Aprovado, c.getTime());
+            
+            for (Agendamento item : lista) {
+                eventModel.addEvent(novoAgendamento(item));
+            }
+        }
         return eventModel;
     }
 
