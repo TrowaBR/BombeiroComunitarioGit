@@ -14,7 +14,7 @@ public class UsuarioDAO implements CrudUsuario {
     public void save(Usuario usuario) {
         Session session = HibernateUtil.getSessionFactory().openSession(); //https://www.devmedia.com.br/entendendo-hibernate-session/29215
         Transaction t = session.beginTransaction(); // transação para acessar a base de dados
-        session.save(usuario); // salvando o objeto do tipo usuário na sessão
+        session.saveOrUpdate(usuario); // salvando o objeto do tipo usuário na sessão
         t.commit(); // comitando o objeto na base de dados
 
     }

@@ -59,17 +59,17 @@ public class AgendamentoDAO implements CrudAgendamento {
         }
 
         if (dataInicio != null) {
-            sql += aux + "(inicio >= '" + HibernateUtil.datePostgre(dataInicio) + "')";
+            sql += aux + "(saida >= " + HibernateUtil.datePostgre(dataInicio) + ")";
             aux = " and ";
         }
         
         if (dataTermino != null) {
-            sql += aux + "(termino <= '" + HibernateUtil.datePostgre(dataTermino) + "')";
+            sql += aux + "(entrada <= " + HibernateUtil.datePostgre(dataTermino) + ")";
             aux = " and ";
         }
 
         if (usuario != null) {
-            sql += aux + "(usuario = " + usuario.getId() + ")";
+            sql += aux + "(usuario_id = " + usuario.getId() + ")";
         }
 
         Session session = HibernateUtil.getSessionFactory().openSession();

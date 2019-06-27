@@ -14,7 +14,7 @@ public class UnidadeDAO implements CrudUnidade {
     public void save(Unidade unidade) {
         Session session = HibernateUtil.getSessionFactory().openSession(); //https://www.devmedia.com.br/entendendo-hibernate-session/29215
         Transaction t = session.beginTransaction(); // transação para acessar a base de dados
-        session.save(unidade); // salvando o objeto do tipo usuário na sessão
+        session.saveOrUpdate(unidade); // salvando o objeto do tipo usuário na sessão
         t.commit(); // comitando o objeto na base de dados
 
     }

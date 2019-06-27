@@ -15,19 +15,19 @@ public class Unidade implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String descricao;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date horasMinimas;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date horasMaximas;
     private int leitosMasculinos;
     private int leitosFemininos;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date horaInicioMasculino;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date horaInicioFeminino;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date horaTerminoMasculino;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date horaTerminoFeminino;
     private boolean ativo;
     private String endereco;

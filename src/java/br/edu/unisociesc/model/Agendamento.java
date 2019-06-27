@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -25,19 +27,19 @@ public class Agendamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @JoinColumn(name = "unidade_id", referencedColumnName = "id", /*nullable=false,*/ insertable=false, updatable=false)
+    @OneToOne
     private Unidade unidade;
 
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id", /*nullable=false,*/ insertable=false, updatable=false)
+    @OneToOne
     private Usuario usuario;
 
     @Enumerated(EnumType.ORDINAL)
     private EstadoAgendamento estado;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date entrada;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date saida;
 
     private long duracao;

@@ -6,7 +6,6 @@ import br.edu.unisociesc.dao.UsuarioDAO;
 import br.edu.unisociesc.model.AgendamentoScheduleEvent;
 import br.edu.unisociesc.model.Agendamento;
 import br.edu.unisociesc.model.EstadoAgendamento;
-import br.edu.unisociesc.model.TiposGraduacao;
 import br.edu.unisociesc.model.Unidade;
 import br.edu.unisociesc.model.Usuario;
 import java.io.Serializable;
@@ -43,6 +42,12 @@ public class CalendarioController implements Serializable {
     }
 
     private AgendamentoScheduleEvent novoAgendamento(Date start, Date end) {
+        if (usuario_fixo == null) {
+            usuario_fixo = new UsuarioDAO().getUsuario(1);
+        }
+        if (unidade_fixa == null) {
+            unidade_fixa = new UnidadeDAO().getUnidade(1);
+        }
         return novoAgendamento(usuario_fixo, unidade_fixa, start, end);
     }
 
@@ -56,12 +61,9 @@ public class CalendarioController implements Serializable {
 
     @PostConstruct
     public void init() {
-        usuario_fixo = new Usuario(1, "BC Hening", "Hening", new Date(), "M", TiposGraduacao.BC, new Date(), "123", "", 0, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-        unidade_fixa = new Unidade(1, "Centro", new Date(), new Date(), 0, 0, new Date(), new Date(), new Date(), new Date(), true, "", "", 0, "");
-
         event = novoAgendamento();
         horasPeriodo = 35;
-        horasMes = 18;
+        horasMes = 10;
     }
 
     public ScheduleModel getEventModel() {

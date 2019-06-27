@@ -17,11 +17,11 @@ public class Usuario implements Serializable { // criação da classe
     private long id;
     private String nomeGuerra;
     private String nomeCompleto;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataNascimento;
     private String sexo;
     private TiposGraduacao graduacao;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataGraduacao;
     private String senha;
     private String endereco;

@@ -18,7 +18,7 @@ public class HibernateUtil {
      */
     // ops não esqueça de importar do pacote correto: deve ser o pacote org.hibernate
     private static SessionFactory sessionFactory;
-    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public HibernateUtil() {
     }
@@ -55,7 +55,7 @@ public class HibernateUtil {
     }
     
     public static String datePostgre(Date date) {
-        return format.format(date);
+        return "'" + format.format(date) + "'";
     }
 
 }
