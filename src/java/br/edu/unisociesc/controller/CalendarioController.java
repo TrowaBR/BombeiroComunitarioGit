@@ -26,13 +26,15 @@ import org.primefaces.model.ScheduleModel;
 public class CalendarioController implements Serializable {
 
     private Usuario usuario_fixo;
-    private Unidade unidade_fixa;
 
     private static final double HORAS_PERIODO = 120;
     private static final int NUM_PERIODOS = 6;
 
     private ScheduleModel eventModel;
     private AgendamentoScheduleEvent event;
+
+    private List<Unidade> unidades;
+    private long unidadeId;
 
     private int horasPeriodo;
     private int horasMes;
@@ -41,14 +43,20 @@ public class CalendarioController implements Serializable {
         return novoAgendamento(new Date(), new Date());
     }
 
+    private Unidade getUnidadeById(long id) {
+        for (Unidade u : getUnidades()) {
+            if (u.getId() == id) {
+                return u;
+            }
+        }
+        return getUnidades().get(0);
+    }
+
     private AgendamentoScheduleEvent novoAgendamento(Date start, Date end) {
         if (usuario_fixo == null) {
             usuario_fixo = new UsuarioDAO().getUsuario(1);
         }
-        if (unidade_fixa == null) {
-            unidade_fixa = new UnidadeDAO().getUnidade(1);
-        }
-        return novoAgendamento(usuario_fixo, unidade_fixa, start, end);
+        return novoAgendamento(usuario_fixo, getUnidadeById(unidadeId), start, end);
     }
 
     private AgendamentoScheduleEvent novoAgendamento(Usuario usuario, Unidade unidade, Date start, Date end) {
@@ -56,7 +64,7 @@ public class CalendarioController implements Serializable {
     }
 
     private AgendamentoScheduleEvent novoAgendamento(Agendamento agendamento) {
-        return new AgendamentoScheduleEvent(agendamento.getUsuario(), agendamento.getUnidade(), agendamento.getEntrada(), agendamento.getSaida());
+        return new AgendamentoScheduleEvent(agendamento);
     }
 
     @PostConstruct
@@ -78,6 +86,12 @@ public class CalendarioController implements Serializable {
             c.set(Calendar.MILLISECOND, 0);
             c.set(Calendar.DAY_OF_MONTH, 1);
             List<Agendamento> lista = dao.list(EstadoAgendamento.Aprovado, c.getTime());
+            
+            for (Agendamento item : lista) {
+                eventModel.addEvent(novoAgendamento(item));
+            }
+
+            lista = dao.list(EstadoAgendamento.Solicitado, c.getTime(), null, usuario_fixo);
             
             for (Agendamento item : lista) {
                 eventModel.addEvent(novoAgendamento(item));
@@ -108,6 +122,20 @@ public class CalendarioController implements Serializable {
     
     public int getPercMes() {
         return (int) (100.0 * horasMes / (HORAS_PERIODO / NUM_PERIODOS));
+    }
+
+    public List<Unidade> getUnidades() {
+        if (unidades == null) {
+            unidades = new UnidadeDAO().list();
+        }
+        return unidades;
+    }
+    public long getUnidadeId() {
+        return unidadeId;
+    }
+    
+    public void setUnidadeId(long unidadeId) {
+        this.unidadeId = unidadeId;
     }
 
     public void addEvent() {

@@ -24,11 +24,8 @@
                             <p:panel style="display: inline-block">
                                 <div style="text-align: left">
                                     <p:outputLabel>Unidade</p:outputLabel><br />
-                                    <p:selectOneMenu style="width:125px">
-                                        <f:selectItem itemLabel="Centro" itemValue="Centro" />
-                                        <f:selectItem itemLabel="COBOM" itemValue="COBOM" />
-                                        <f:selectItem itemLabel="Garcia" itemValue="Garcia" />
-                                        <f:selectItem itemLabel="Itoupava" itemValue="Itoupava" />
+                                    <p:selectOneMenu value="#{calendarioController.unidadeId}" style="width:180px">
+                                        <f:selectItems value="#{calendarioController.unidades}" var="u" itemLabel="#{u.descricao}" itemValue="#{u.id}" />
                                     </p:selectOneMenu>
                                 </div>
                             </p:panel>

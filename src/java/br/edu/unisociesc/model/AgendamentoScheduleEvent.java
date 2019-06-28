@@ -9,7 +9,15 @@ public class AgendamentoScheduleEvent extends DefaultScheduleEvent {
     
     public AgendamentoScheduleEvent(Usuario usuario, Unidade unidade, Date start, Date end) {
         super(usuario.getNomeGuerra(), start, end);
+        if (unidade == null) {
+            unidade = new Unidade();
+        }
         agendamento = new Agendamento(0, unidade, usuario, EstadoAgendamento.Solicitado, start, end);
+    }
+
+    public AgendamentoScheduleEvent(Agendamento agendamento) {
+        super(agendamento.getUsuario().getNomeGuerra(), agendamento.getEntrada(), agendamento.getSaida());
+        this.agendamento = agendamento;
     }
 
     public AgendamentoScheduleEvent() {
