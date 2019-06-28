@@ -50,4 +50,12 @@ public class AgendamentoScheduleEvent extends DefaultScheduleEvent {
         agendamento.setSaida(endDate);
     }
 
+    @Override
+    public String getStyleClass() {
+        String classe = super.getStyleClass();
+        if (EstadoAgendamento.Solicitado.equals(agendamento.getEstado())) {
+            classe += " ui-state-highlight";
+        }
+        return classe;
+    }
 }
