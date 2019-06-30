@@ -16,14 +16,14 @@
                 <br></br>
                 <h:form id="formrelHorasServico" styleClass="formTabela">
 
-                    <p:dataTable var="relatorio" value="#{usuarioBean.relatorioHoras}" rows="20" paginator="true" paginatorTemplate="{CurrentPageReport}
+                    <p:dataTable var="relatorio" value="#{relatorioHorasController.list()}" rows="20" paginator="true" paginatorTemplate="{CurrentPageReport}
                                  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-                        <p:column headerText="Usuário" sortBy="#{relatorio.nome}">
-                            <h:outputText value="#{relatorio.nome}" />
-                        </p:column>
+                        <p:column headerText="Usuário" sortBy="#{relatorio.usuario.nomeCompleto}">
+                            <h:outputText value="#{relatorio.usuario.nomeCompleto}" />
+                        </p:column> 
 
                         <p:column headerText="Nome de Guerra">
-                            <h:outputText value="#{relatorio.nomeGuerra}" />
+                            <h:outputText value="#{relatorio.usuario.nomeGuerra}" />
                         </p:column>
 
                         <p:column headerText="Horas no mês">

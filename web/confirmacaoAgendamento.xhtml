@@ -19,7 +19,7 @@
                         <p:panel header="Confirmação de agendamento">
                             <p:dataTable var="agendamento" value="#{confirmacaoAgendamentoController.lista}">
                                 <p:column headerText="Nome">
-                                    <h:outputText value="#{agendamento.usuario.nome}" /><br />
+                                    <h:outputText value="#{agendamento.usuario.nomeCompleto}" /><br />
                                 </p:column>
 
                                 <p:column headerText="Data">
@@ -27,8 +27,12 @@
                                 </p:column>
 
                                  <p:column headerText="Aprovação">
-                                    <p:button value="Presença" onclick="#{confirmacaoAgendamentoController.presenca()}" /> 
-                                    <p:button value="Ausência" onclick="#{confirmacaoAgendamentoController.ausencia()}" />  
+                                    <p:commandButton value="Presença" action="#{confirmacaoAgendamentoController.presenca()}" 
+                                                                      update=":formConfirmacaoAgendamento" 
+                                                                      onclick="PF('cadastra').show()"/>
+                                    <p:commandButton value="Ausência" action="#{confirmacaoAgendamentoController.ausencia()}" 
+                                                                      update=":formConfirmacaoAgendamento" 
+                                                                      onclick="PF('cadastra').show()"/>  
                                 </p:column>
                             </p:dataTable>
                         </p:panel>
@@ -38,7 +42,7 @@
                         <p:panel header="Solicitação de agendamento">
                            <p:dataTable var="agendamento" value="#{confirmacaoSolicitacaoController.lista}">
                                 <p:column headerText="Nome">
-                                    <h:outputText value="#{agendamento.usuario.nome}" /><br />
+                                    <h:outputText value="#{agendamento.usuario.nomeCompleto}" /><br />
                                 </p:column>
 
                                 <p:column headerText="Data">
@@ -46,8 +50,12 @@
                                 </p:column>
 
                                 <p:column headerText="Aprovação">
-                                    <p:button value="Aprovar" onclick="#{confirmacaoSolicitacaoController.aprovar()}" /> 
-                                    <p:button value="Recusar" onclick="#{confirmacaoSolicitacaoController.reprovar()}" />
+                                    <p:commandButton value="Aprovar" action="#{confirmacaoSolicitacaoController.aprovar()}"
+                                                                      update=":formConfirmacaoAgendamento" 
+                                                                      onclick="PF('cadastra').show()"/>
+                                    <p:commandButton value="Recusar" action="#{confirmacaoSolicitacaoController.reprovar()}" 
+                                                                      update=":formConfirmacaoAgendamento" 
+                                                                      onclick="PF('cadastra').show()"/>
                                 </p:column>
                             </p:dataTable>
                         </p:panel>

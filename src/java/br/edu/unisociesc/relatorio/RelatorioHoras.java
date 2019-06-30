@@ -1,54 +1,67 @@
 package br.edu.unisociesc.relatorio;
 
-public class RelatorioHoras {
-    
-    private int horasMes;
-    private String nomeGuerra;
-    private int horasSemestre;
-    private String nome;
+import br.edu.unisociesc.model.Usuario;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+@Entity
+public class RelatorioHoras implements Serializable{
+    @GeneratedValue
+    @Id
+    private long id;
+    private long horasMes;
+    private long horasSemestre;
+
+    @OneToOne
+    private Usuario usuario;
 
 
     public RelatorioHoras(){
         
     }
-    public RelatorioHoras(String nome, String nomeGuerra,int horasMes, int horasSemestre) {
-        this.nome = nome;
-        this.nomeGuerra = nomeGuerra;
+    public RelatorioHoras(long id,int horasMes, int horasSemestre, Usuario usuario) {
+        this.id = id;
         this.horasMes = horasMes;
         this.horasSemestre = horasSemestre;
-
+        this.usuario = usuario;
     }
 
-    public int getHorasMes() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    
+
+    public long getHorasMes() {
         return horasMes;
     }
 
-    public void setHorasMes(int horasMes) {
+    public void setHorasMes(long horasMes) {
         this.horasMes = horasMes;
     }
 
-    public String getNomeGuerra() {
-        return nomeGuerra;
-    }
-
-    public void setNomeGuerra(String nomeGuerra) {
-        this.nomeGuerra = nomeGuerra;
-    }
-
-    public int getHorasSemestre() {
+    public long getHorasSemestre() {
         return horasSemestre;
     }
 
-    public void setHorasSemestre(int horasSemestre) {
+    public void setHorasSemestre(long horasSemestre) {
         this.horasSemestre = horasSemestre;
     }
 
-    public String getNome() {
-        return nome;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
+    
+    
     
 }
