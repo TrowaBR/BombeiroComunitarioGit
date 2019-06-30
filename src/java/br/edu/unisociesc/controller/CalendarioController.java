@@ -11,7 +11,6 @@ import br.edu.unisociesc.model.Usuario;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -27,17 +26,16 @@ public class CalendarioController implements Serializable {
 
     private Usuario usuario_fixo;
 
-    private static final double HORAS_PERIODO = 120;
-    private static final int NUM_PERIODOS = 6;
-
     private ScheduleModel eventModel;
     private AgendamentoScheduleEvent event;
+    
+    private AgendamentoDAO agendamentoDAO;
 
     private List<Unidade> unidades;
     private long unidadeId;
 
-    private int horasPeriodo;
-    private int horasMes;
+    private double horasPeriodo = -1;
+    private double horasMes = -1;
     
     private AgendamentoScheduleEvent novoAgendamento() {
         return novoAgendamento(new Date(), new Date());
@@ -69,29 +67,36 @@ public class CalendarioController implements Serializable {
 
     @PostConstruct
     public void init() {
+        agendamentoDAO = new AgendamentoDAO();
         event = novoAgendamento();
-        horasPeriodo = 35;
-        horasMes = 10;
+        horasPeriodo = 0;
+        horasMes = 0;
     }
 
     public ScheduleModel getEventModel() {
         if (eventModel == null) {
             eventModel = new DefaultScheduleModel();
-            AgendamentoDAO dao = new AgendamentoDAO();
-            Calendar c = GregorianCalendar.getInstance();
-            c.setTime(new Date());
-            c.set(Calendar.HOUR_OF_DAY, 0);
-            c.set(Calendar.MINUTE, 0);
-            c.set(Calendar.SECOND, 0);
-            c.set(Calendar.MILLISECOND, 0);
-            c.set(Calendar.DAY_OF_MONTH, 1);
-            List<Agendamento> lista = dao.list(EstadoAgendamento.Aprovado, c.getTime());
-            
+            Calendar calMes = Calendar.getInstance();
+            calMes.setTime(new Date());
+            calMes.set(Calendar.HOUR_OF_DAY, 0);
+            calMes.set(Calendar.MINUTE, 0);
+            calMes.set(Calendar.SECOND, 0);
+            calMes.set(Calendar.MILLISECOND, 0);
+            calMes.set(Calendar.DAY_OF_MONTH, 1);
+
+            List<Agendamento> lista = agendamentoDAO.listPeriodo(EstadoAgendamento.Aprovado, new Date());
+            double horas;
             for (Agendamento item : lista) {
+                horas = item.getDuracao() / 60;
+                if (calMes.after(item.getSaida())) {
+                    horasMes += horas;
+                }
+                horasPeriodo += horas;
+
                 eventModel.addEvent(novoAgendamento(item));
             }
 
-            lista = dao.list(EstadoAgendamento.Solicitado, c.getTime(), null, usuario_fixo);
+            lista = agendamentoDAO.list(EstadoAgendamento.Solicitado, new Date(), null, usuario_fixo);
             
             for (Agendamento item : lista) {
                 eventModel.addEvent(novoAgendamento(item));
@@ -109,19 +114,19 @@ public class CalendarioController implements Serializable {
     }
 
     public int getHorasPeriodo() {
-        return horasPeriodo;
+        return (int) horasPeriodo;
     }
 
     public int getPercPeriodo() {
-        return (int) (100.0 * horasPeriodo / HORAS_PERIODO);
+        return (int) Math.min(100.0 * horasPeriodo / AgendamentoDAO.HORAS_PERIODO, 100);
     }
 
     public int getHorasMes() {
-        return horasMes;
+        return (int) horasMes;
     }
     
     public int getPercMes() {
-        return (int) (100.0 * horasMes / (HORAS_PERIODO / NUM_PERIODOS));
+        return (int) Math.min(100.0 * horasMes / (AgendamentoDAO.HORAS_PERIODO / AgendamentoDAO.NUM_PERIODOS), 100);
     }
 
     public List<Unidade> getUnidades() {

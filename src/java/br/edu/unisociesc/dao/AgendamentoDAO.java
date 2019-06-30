@@ -1,10 +1,12 @@
 package br.edu.unisociesc.dao;
 
 // importação de classes de outros pacotes que vamos utilizar
+import br.edu.unisociesc.model.FiltroAgendamento;
 import br.edu.unisociesc.model.Agendamento;
 import br.edu.unisociesc.model.EstadoAgendamento;
 import br.edu.unisociesc.model.Usuario;
 import br.edu.unisociesc.utils.HibernateUtil;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
@@ -12,6 +14,9 @@ import org.hibernate.Transaction;
 
 // Classe que implementa a interface....Todos os métodos da interface a classe deve possuir
 public class AgendamentoDAO implements CrudAgendamento {
+    
+    public static final double HORAS_PERIODO = 120;
+    public static final int NUM_PERIODOS = 6;
 
     @Override
     public void save(Agendamento agendamento) {
@@ -49,9 +54,77 @@ public class AgendamentoDAO implements CrudAgendamento {
     }
 
     @Override
+    public List<Agendamento> listPeriodo(EstadoAgendamento estado, Date dataInicio) {
+        return list(estado, null, dataInicio, null, FiltroAgendamento.Periodo);
+    }
+    
+    @Override
+    public List<Agendamento> listMes(EstadoAgendamento estado, Date dataInicio) {
+        return list(estado, null, dataInicio, null, FiltroAgendamento.Mes);
+    }
+
+    @Override
     public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio, Date dataTermino, Usuario usuario) {
+        return list(estado, dataInicio, dataTermino, usuario, null);
+    }
+    
+    private int peiodo(Calendar calendar) {
+        return (calendar.get(Calendar.MONTH)-1) / NUM_PERIODOS;
+    }
+    
+    private Date inicioDia(Date data) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(data);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        return c.getTime();
+    }
+
+    private Date terminoDia(Date data) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(data);
+        c.set(Calendar.HOUR_OF_DAY, c.getActualMaximum(Calendar.HOUR_OF_DAY));
+        c.set(Calendar.MINUTE, c.getActualMaximum(Calendar.MINUTE));
+        c.set(Calendar.SECOND, c.getActualMaximum(Calendar.SECOND));
+        c.set(Calendar.MILLISECOND, c.getActualMaximum(Calendar.MILLISECOND));
+        return c.getTime();
+    }
+
+    private Date inicioMes(Date data) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(data);
+        c.set(Calendar.DAY_OF_MONTH, 1);
+        return c.getTime();
+    }
+
+    private Date terminoMes(Date data) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(data);
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+        return c.getTime();
+    }
+
+    private Date inicioPeriodo(Date data) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(data);
+        c.set(Calendar.MONTH, (peiodo(c) * NUM_PERIODOS) + 1);
+        return c.getTime();
+    }
+
+    private Date terminoPeriodo(Date data) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(data);
+        c.set(Calendar.MONTH, (peiodo(c) * NUM_PERIODOS) + NUM_PERIODOS);
+        return c.getTime();
+    }
+
+    @Override
+    public List<Agendamento> list(EstadoAgendamento estado, Date dataInicio, Date dataTermino, Usuario usuario, FiltroAgendamento filtro) {
         String sql = "from Agendamento";
         String aux = " where ";
+        Date data;
         
         if (estado != null) {
             sql += aux + "(estado = " + estado.ordinal() + ")";
@@ -59,12 +132,22 @@ public class AgendamentoDAO implements CrudAgendamento {
         }
 
         if (dataInicio != null) {
-            sql += aux + "(saida >= " + HibernateUtil.datePostgre(dataInicio) + ")";
+            switch (filtro) {
+                case Periodo: data = inicioPeriodo(dataTermino); break;
+                case Mes: data = inicioMes(dataTermino); break;
+                default: data = inicioDia(dataTermino);
+            }
+            sql += aux + "(saida >= " + HibernateUtil.datePostgre(data) + ")";
             aux = " and ";
         }
         
         if (dataTermino != null) {
-            sql += aux + "(entrada <= " + HibernateUtil.datePostgre(dataTermino) + ")";
+            switch (filtro) {
+                case Periodo: data = terminoPeriodo(dataTermino); break;
+                case Mes: data = terminoMes(dataTermino); break;
+                default: data = terminoDia(dataTermino);
+            }
+            sql += aux + "(entrada <= " + HibernateUtil.datePostgre(data) + ")";
             aux = " and ";
         }
 
