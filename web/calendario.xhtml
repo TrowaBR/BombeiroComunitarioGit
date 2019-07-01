@@ -25,6 +25,8 @@
                                 <div style="text-align: left">
                                     <p:outputLabel>Unidade</p:outputLabel><br />
                                     <p:selectOneMenu value="#{calendarioController.unidadeId}" style="width:180px">
+                                        <f:ajax event="change" render="@form" listener="#{calendarioController.atualizaUnidade}" />  
+                                        <f:selectItem itemLabel="--Selecione--" itemValue="" itemDisabled="true" />
                                         <f:selectItems value="#{calendarioController.unidades}" var="u" itemLabel="#{u.descricao}" itemValue="#{u.id}" />
                                     </p:selectOneMenu>
                                 </div>
