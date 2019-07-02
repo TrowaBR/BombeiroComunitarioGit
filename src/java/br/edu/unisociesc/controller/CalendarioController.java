@@ -111,28 +111,25 @@ public class CalendarioController implements Serializable {
         if (unidadeId.length() > 0) {
             unidade = getUnidadeById(Long.parseLong(unidadeId));
 
-            List<Agendamento> lista = agendamentoDAO.list(EstadoAgendamento.Aprovado, DateUtil.inicioPeriodo(new Date()), DateUtil.terminoPeriodo(new Date()), null, null);
+            // Agendamentos aprovados
+            List<Agendamento> lista = agendamentoDAO.list(EstadoAgendamento.Aprovado, DateUtil.inicioPeriodo(new Date()), DateUtil.terminoPeriodo(new Date()), getUsuario(), null);
             double horas;
             for (Agendamento item : lista) {
                 horas = item.getDuracao() / 60;
                 if (inicioSchedule.getTime().before(item.getSaida())) {
                     horasMes += horas;
-
-                    if (unidade.getId() == item.getId()) {
-                        eventoTabela = new AgendamentoScheduleEvent(item);
-                        eventoTabela.setEditable(false);
-                        getEventModel().addEvent(eventoTabela);
-                    }
                 }
                 horasPeriodo += horas;
             }
 
-            lista = agendamentoDAO.list(EstadoAgendamento.Solicitado, inicioSchedule.getTime(), null, getUsuario(), unidade);
-            
+            // Agendamentos do mês
+            lista = agendamentoDAO.list(null, inicioSchedule.getTime(), null, null, unidade);
             for (Agendamento item : lista) {
-                eventoTabela = new AgendamentoScheduleEvent(item);
-                eventoTabela.setEditable(false);
-                getEventModel().addEvent(eventoTabela);
+                if (item.getEstado() == EstadoAgendamento.Solicitado || item.getEstado() == EstadoAgendamento.Aprovado) {
+                    eventoTabela = new AgendamentoScheduleEvent(item);
+                    eventoTabela.setEditable(false);
+                    getEventModel().addEvent(eventoTabela);
+                }
             }
         } else {
             unidade = null;
