@@ -15,7 +15,7 @@ public class ConfirmacaoSolicitacaoController {
     List<Agendamento> lista;
 
     private void atualizaLista() {
-        lista = new AgendamentoDAO().list(EstadoAgendamento.Solicitado);
+        lista = new AgendamentoDAO().list(EstadoAgendamento.Solicitado, null, null, null, null);
         listaSolicitacaoAgendamento = new ListDataModel(lista);
     }
 

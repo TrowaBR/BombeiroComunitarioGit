@@ -17,8 +17,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 
 
  @ManagedBean
@@ -45,7 +43,7 @@ public class RelatorioHorasController implements Serializable{
         RelatorioHoras resultado;
         
         agendamentoLista = new ArrayList<>();
-        List<Agendamento> agendamentos = dao.list(EstadoAgendamento.Presente);
+        List<Agendamento> agendamentos = dao.list(EstadoAgendamento.Presente, null, null, null, null);
         Calendar ini = GregorianCalendar.getInstance();
         ini.setTime(new Date());
         ini.set(Calendar.HOUR_OF_DAY, 0);

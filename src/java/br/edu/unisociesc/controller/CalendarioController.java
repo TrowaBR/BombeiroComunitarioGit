@@ -8,6 +8,7 @@ import br.edu.unisociesc.model.Agendamento;
 import br.edu.unisociesc.model.EstadoAgendamento;
 import br.edu.unisociesc.model.Unidade;
 import br.edu.unisociesc.model.Usuario;
+import br.edu.unisociesc.utils.DateUtil;
 import br.edu.unisociesc.utils.Testes;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -39,7 +40,7 @@ public class CalendarioController implements Serializable {
     private Unidade unidade;
     private String unidadeId;
 
-    private Calendar inicioMes;
+    private Calendar inicioSchedule;
 
     private double horasPeriodo;
     private double horasMes;
@@ -75,10 +76,6 @@ public class CalendarioController implements Serializable {
         return new AgendamentoScheduleEvent(getUsuario(), unidade, start, end);
     }
 
-    private AgendamentoScheduleEvent novoAgendamento(Agendamento agendamento) {
-        return new AgendamentoScheduleEvent(agendamento);
-    }
-    
     @PostConstruct
     public void init() {
         agendamentoDAO = new AgendamentoDAO();
@@ -86,13 +83,10 @@ public class CalendarioController implements Serializable {
         unidadeDAO = new UnidadeDAO();
         unidadeId = "";
 
-        inicioMes = Calendar.getInstance();
-        inicioMes.setTime(new Date());
-        inicioMes.set(Calendar.HOUR_OF_DAY, 0);
-        inicioMes.set(Calendar.MINUTE, 0);
-        inicioMes.set(Calendar.SECOND, 0);
-        inicioMes.set(Calendar.MILLISECOND, 0);
-        inicioMes.set(Calendar.DAY_OF_MONTH, 1);
+        inicioSchedule = Calendar.getInstance();
+        inicioSchedule.setTime(new Date());
+        inicioSchedule.set(Calendar.DAY_OF_MONTH, 0);
+        inicioSchedule = DateUtil.inicioDia(inicioSchedule);
     }
     
     public List<Unidade> getUnidades() {
@@ -110,30 +104,47 @@ public class CalendarioController implements Serializable {
 
     public void atualizaUnidade() {
         getEventModel().clear();
+        AgendamentoScheduleEvent eventoTabela;
         horasPeriodo = 0;
         horasMes = 0;
 
         if (unidadeId.length() > 0) {
             unidade = getUnidadeById(Long.parseLong(unidadeId));
 
-            List<Agendamento> lista = agendamentoDAO.listPeriodo(EstadoAgendamento.Aprovado, new Date(), unidade);
+            List<Agendamento> lista = agendamentoDAO.list(EstadoAgendamento.Aprovado, DateUtil.inicioPeriodo(new Date()), DateUtil.terminoPeriodo(new Date()), null, null);
             double horas;
             for (Agendamento item : lista) {
                 horas = item.getDuracao() / 60;
-                if (inicioMes.before(item.getSaida())) {
+                if (inicioSchedule.getTime().before(item.getSaida())) {
                     horasMes += horas;
-                    getEventModel().addEvent(novoAgendamento(item));
+
+                    if (unidade.getId() == item.getId()) {
+                        eventoTabela = new AgendamentoScheduleEvent(item);
+                        eventoTabela.setEditable(false);
+                        getEventModel().addEvent(eventoTabela);
+                    }
                 }
                 horasPeriodo += horas;
             }
 
-            lista = agendamentoDAO.list(EstadoAgendamento.Solicitado, new Date(), null, getUsuario());
+            lista = agendamentoDAO.list(EstadoAgendamento.Solicitado, inicioSchedule.getTime(), null, getUsuario(), unidade);
             
             for (Agendamento item : lista) {
-                getEventModel().addEvent(novoAgendamento(item));
+                eventoTabela = new AgendamentoScheduleEvent(item);
+                eventoTabela.setEditable(false);
+                getEventModel().addEvent(eventoTabela);
             }
         } else {
             unidade = null;
+        }
+    }
+
+    private void addAgendamento(AgendamentoScheduleEvent evento) {
+        evento.setEditable(false);
+        if (evento.getId() == null) {
+            eventModel.addEvent(evento);
+        } else {
+            eventModel.updateEvent(evento);
         }
     }
 
@@ -141,13 +152,7 @@ public class CalendarioController implements Serializable {
         AgendamentoDAO dao = new AgendamentoDAO();
         event.getAgendamento().setUnidade(unidade);
         dao.save(event.getAgendamento());
-        event.setEditable(false);
-        if (event.getId() == null) {
-            eventModel.addEvent(event);
-        } else {
-            eventModel.updateEvent(event);
-        }
-
+        addAgendamento(event);
         setEvent(novoAgendamento());
     }
 

@@ -30,7 +30,7 @@ public class histAlocacaoController {
 
     public List<Agendamento> getAgendamentoLista() {
         if (agendamentoLista == null) {
-            agendamentoLista = new AgendamentoDAO().list();
+            agendamentoLista = new AgendamentoDAO().list(null, null, null, null, null);
         }
         
        
